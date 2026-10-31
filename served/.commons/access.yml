@@ -1,0 +1,20 @@
+# The access this MCP serves at its first deployment: a copy WITHOUT USERS of the Federation's draft (cloudsters.o,
+# branch d4/federation-offer, b5c1034). This repository is public: never add a user here. Every envelope publishes
+# what this file says anyway (mcp R28); the users stay in the Federation's CORE (mcp R1, R7).
+# federation.mcp — the Federation's access, DRAFT for Holger and D3-CF (cloudsters.o#59, #66). Not decided.
+# Without users (mcp R28): the offer per shell is generated from this file alone.
+# Classes follow the offer sheet's "reads up to" (#66 §2, §5): Explorer and the Insight Licence read up to OPEN (`member`, S6),
+# Engineer and the Practice Licence up to PEER, Incubator and the Depth Licence up to CORE.
+# External MCP access is read-only (Holger, 24 Oct, #66), so no shell writes; a write is a proposal (mcp R2).
+# Budget: the template's default; the default budget is Holger's (mcp M2).
+classes: {public: ROAM, member: OPEN, practice: PEER, depth: CORE, personal: CORE}
+public: {}
+federation: https://mcp.cloudsters.net/federation
+shells:
+  SEED: {writes: []}
+  CORE: {writes: []}
+  PEER: {writes: []}
+  OPEN: {writes: []}
+  DOCK: {writes: []}
+users: []   # SEED's users are the Federation's stewards, Holger's to name; until then check_mcp fails `setup` (R26)
+keep: 90

@@ -1,0 +1,4 @@
+# The register of what this MCP serves at its first deployment (graph R1): the canon of the Commons, the specifications
+# of the installed Commons Essentials, everyone's. The Federation's own register is cloudsters/federation.graph.
+sources:
+  - {id: canon, kind: specs, ref: extensions/commons-engineering/commons-essentials/specs, class: public}

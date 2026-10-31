@@ -17,3 +17,22 @@ It answers at `https://mcp.cloudsters.net/federation` (H3).
 - Any credential. The deployment credential is held apart from the code (H4).
 
 Run the tools with `python -B`, so that no bytecode is written into the installed copy.
+
+## The Worker (H4)
+
+`federation-mcp` is a **Cloudflare Python Worker** (Pyodide, Python 3.14), on the route `mcp.cloudsters.net/federation*`. It is no port: it runs the released `serve_mcp.py` unchanged, behind a thin transport.
+
+| Path | What |
+|---|---|
+| `worker/src/mcp_http.py` | the transport: MCP Streamable HTTP, JSON-RPC over `POST /federation`, answered with JSON |
+| `worker/src/main.py` | the Worker's entry |
+| `worker/wrangler.toml` | name, route and the `python_workers` flag; no credential |
+| `deploy/build.py` | packs the served CORE (the installed copy, the pin and lock, and `served/`) into `worker/src/core_bundle.py`, which is build output |
+| `served/` | the users-free access and the register of what is served at the first deployment |
+| `tests/test_transport.py` | the calls a session makes, run over the built CORE |
+| `.github/workflows/check.yml` | the checks, on every pull request |
+| `.github/workflows/deploy.yml` | the deployment on every merge to `main`; it reads only the secrets `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID`, and does nothing while they are unset |
+
+**Locally:**
+- `python -B deploy/build.py`, then `python -B tests/test_transport.py`;
+- `cd worker && uv run pywrangler dev` serves it at `http://127.0.0.1:8787/federation`.
