@@ -1,0 +1,14 @@
+id: model-workshop
+term: Model Workshop
+layer: how
+kind: concept
+definition: "Where a commons' model of its value creation is worked on: changes are proposed, checked and released into its Commons CORE by those who hold a mandate for it."
+why: The boundary to the Commons Workshop is the direction of writing; only the Model Workshop writes the model, so every change to it is proposed, checked and released under a mandate. This term carries the meaning that `commons-workshop` held until 21 October 2026.
+relations:
+  releases_into: commons-core
+  receives_proposals_from: commons-workshop
+status: accepted
+decided:
+  date: '2026-10-29'
+  by: Holger
+  where: 'commons.o#98, comment 6505618412: Adopted 29 October 2026 (the merge of commons.o#100); first decided 2026-10-21, commons.o#71 (W1, W2)'

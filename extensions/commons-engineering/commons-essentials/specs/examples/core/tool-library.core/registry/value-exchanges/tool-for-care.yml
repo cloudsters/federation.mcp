@@ -1,0 +1,10 @@
+kind: value-exchange
+slug: tool-for-care
+title: A tool for its care
+touchpoint: lending-desk
+offered:
+- a working tool for as long as it is needed
+returned:
+- the tool back
+- clean and on time
+- word of what broke

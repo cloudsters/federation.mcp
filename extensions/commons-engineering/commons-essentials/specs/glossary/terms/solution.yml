@@ -1,0 +1,8 @@
+id: solution
+term: Solution
+layer: how
+kind: element
+definition: 'Element 8: which system carries which capability.'
+relations:
+  part_of: scaffold
+status: draft

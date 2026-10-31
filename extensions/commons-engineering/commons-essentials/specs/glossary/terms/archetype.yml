@@ -1,0 +1,12 @@
+id: archetype
+term: Archetype
+layer: how
+kind: concept
+definition: An element of the model as a type, never a person or a single case; offered by an extension and held by a commons in its registry.
+why: The model holds archetypes, not people (MODEL §2.0). What marks an adopted archetype is its origin, not a second kind of thing. In an extension's element model, the archetypes offered for an element are listed under `archetypes`. Proposed by D0-CE in commons.o#90 (comment 6420921361); not yet decided.
+relations:
+  part_of: scaffold
+not:
+- kind
+- a person
+status: draft

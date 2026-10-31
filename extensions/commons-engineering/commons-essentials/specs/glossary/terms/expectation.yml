@@ -1,0 +1,15 @@
+id: expectation
+term: Expectation
+layer: how
+kind: concept
+definition: 'A statement computed from the inputs a CORE holds, of standing expected, named expectation:<n> and the same
+  for the same inputs, never a fact and never a source.'
+why: 'A prediction stored as a fact becomes evidence for the next prediction. An expectation is cached with the build
+  record, as restricted as the most restricted of its inputs, and named by the event its difference decided.'
+relations:
+  computed_from: commons-core
+not:
+- a reading
+- a prediction
+- a forecast
+status: draft

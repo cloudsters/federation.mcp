@@ -1,0 +1,20 @@
+# generated from the release records (library.md R6); never edited by hand
+releases:
+- id: garden
+  kind: extension
+  version: 0.1.0
+  record: garden/0.1.0/release.yml
+  digest: sha256:4fbe1307277e07e452cd418c75f90c01f2a4c09977e20977f607aac43b64971a
+  state: retired
+- id: garden
+  kind: extension
+  version: 1.0.0
+  record: garden/1.0.0/release.yml
+  digest: sha256:b60110758219245c3f323a38dd0961c54ac238c6fd20c1d837da4388a897ef99
+  state: released
+- id: patterns
+  kind: extract
+  version: v2026.11.0
+  record: patterns/v2026.11.0/release.yml
+  digest: sha256:62d6b31eb75170e760569156696c2caefa67067e0e4a8967a81e92ddd785819f
+  state: released

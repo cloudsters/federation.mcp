@@ -1,0 +1,9 @@
+id: visibility-class
+term: Visibility class
+layer: what
+kind: concept
+definition: 'Who may see a thing: public, member, or a class an operator defines.'
+why: The discipline never depends on an operator; an operator maps its own membership onto these classes.
+not:
+- tier
+status: draft

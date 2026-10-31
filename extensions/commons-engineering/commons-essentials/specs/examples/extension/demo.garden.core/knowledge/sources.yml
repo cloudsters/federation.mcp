@@ -1,0 +1,16 @@
+sources:
+- id: S1
+  title: A sample growing guide
+  origin: public
+  designation: SAMPLE-GG
+  edition: '2024'
+  jurisdiction: global
+  area: cultivation
+  relation: derived-from
+  verified:
+    confirmation: '2026-10-26'
+    refutation: '2026-10-26'
+  licence: open
+  class: public
+  informs:
+  - value-stream:grow-and-share

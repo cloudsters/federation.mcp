@@ -1,0 +1,18 @@
+id: practice
+term: Practice
+layer: how
+kind: concept
+definition: 'One of the ten ways of working of the discipline Commons Engineering: SPECIFICATION, MODEL, CORE, LIBRARY,
+  FABRIC, GRAPH, MCP, FLOW, EXTENSION and LEARN, five of which have a component of the same name and five apply
+  across.'
+why: 'Each practice is written in the specification of its name. Discipline names Commons Engineering alone; its parts
+  are practices.'
+relations:
+  part_of: commons-engineering
+not:
+- discipline (for one of them)
+status: accepted
+decided:
+  date: '2026-10-29'
+  by: Holger
+  where: 'commons.o#98, comment 6505618412: Adopted 29 October 2026 (the merge of commons.o#100)'

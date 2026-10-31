@@ -1,0 +1,18 @@
+id: where-used
+term: Where-used
+layer: what
+kind: concept
+definition: 'The resolution read backwards: every part, on every level and across commons, whose bill holds a given
+  part, at stated revisions.'
+why: 'A library needs it when it withholds a release, since a withholding stops distribution and recalls nothing, and
+  where-used shows which commons hold the copy. In German, Verwendungsnachweis.'
+relations:
+  inverse_of: resolution
+  computed_by: commons-graph
+not:
+- a register kept by hand
+status: accepted
+decided:
+  date: '2026-10-30'
+  by: Holger
+  where: 'commons.o#107, comment 6519835234: Adopted 30 October 2026 (step 1 of the bill of materials)'

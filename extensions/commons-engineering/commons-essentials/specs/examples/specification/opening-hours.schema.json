@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": [
+    "timezone",
+    "weekly"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "timezone": {
+      "type": "string",
+      "description": "IANA name, for example Europe/Berlin"
+    },
+    "weekly": {
+      "type": "object",
+      "propertyNames": {
+        "enum": [
+          "mon",
+          "tue",
+          "wed",
+          "thu",
+          "fri",
+          "sat",
+          "sun"
+        ]
+      },
+      "additionalProperties": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "pattern": "^\\d{2}:\\d{2}-\\d{2}:\\d{2}$"
+        }
+      }
+    },
+    "exceptions": {
+      "type": "object",
+      "propertyNames": {
+        "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+      },
+      "additionalProperties": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "pattern": "^\\d{2}:\\d{2}-\\d{2}:\\d{2}$"
+        }
+      },
+      "description": "a date with its hours; an empty list means closed"
+    }
+  },
+  "$id": "opening-hours.schema.json",
+  "title": "opening-hours"
+}

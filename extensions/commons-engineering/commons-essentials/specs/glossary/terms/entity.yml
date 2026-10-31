@@ -1,0 +1,8 @@
+id: entity
+term: Entity
+layer: how
+kind: element
+definition: 'Element 7: the nouns the capabilities act upon.'
+relations:
+  part_of: scaffold
+status: draft

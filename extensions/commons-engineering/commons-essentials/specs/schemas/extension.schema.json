@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://commons.engineering/schemas/extension.schema.json",
+  "title": "extension",
+  "description": "The offer of a [domain].core, `offer/offer.yml` (extension.md R25), and in $defs the release record of an extension, `release.yml` (R32). Version, licence and attribution are not fields of the offer: the release, LICENSE and knowledge/sources.yml.",
+  "type": "object",
+  "required": ["id", "kind", "gives", "asks"],
+  "properties": {
+    "id": {"type": "string", "pattern": "^(?![0-9]+$)[a-z0-9]+(-[a-z0-9]+)*$", "description": "the extension's id, the domain; referred to as <library>/<id>"},
+    "kind": {"type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$", "description": "the kind of commons the extension is made for"},
+    "gives": {"type": "string", "minLength": 1, "description": "what a commons of the kind gains from it"},
+    "asks": {"type": "string", "minLength": 1, "description": "what it asks back: evidence, a Body to hold what is adopted, a loop to keep it alive"}
+  },
+  "not": {"anyOf": [{"required": ["version"]}, {"required": ["license"]}, {"required": ["standards"]}, {"required": ["half"]}, {"required": ["dependencies"]}]},
+  "$defs": {
+    "release": {
+      "type": "object",
+      "required": ["extension", "library", "version", "made_in", "gate", "changed"],
+      "properties": {
+        "extension": {"type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"},
+        "library": {"type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"},
+        "version": {"type": "string", "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(-rc\\.[0-9]+)?$"},
+        "made_in": {"type": "string", "pattern": "^[^/@]+/[^/@]+@[0-9a-f]{7,40}$", "description": "the [domain].core and the commit the release was made from, owner/repo@sha"},
+        "gate": {
+          "type": "object",
+          "required": ["result", "check"],
+          "properties": {
+            "result": {"enum": ["pass", "fail"]},
+            "check": {"type": "string", "description": "the check that ran, owner/repo@rev:path"}
+          }
+        },
+        "changed": {"type": "array", "items": {"enum": ["essentials", "enhanced"]}, "description": "which parts changed, so that a change of served depth never reads as a change of what is installed"},
+        "renames": {"type": "object", "additionalProperties": {"type": ["string", "null"]}, "description": "old offered id -> new id, or null where it is retired; required content for a major version"}
+      }
+    }
+  }
+}

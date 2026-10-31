@@ -1,0 +1,19 @@
+id: user
+term: User
+layer: how
+kind: concept
+definition: 'An account that signs in, a human''s or a technical one, and the only carrier of access, through the one
+  shell of a commons it belongs to.'
+why: 'Access and mandate never mix: a user has access through its shell, a Body has a mandate through its Posts. A
+  technical user names the human accountable for it.'
+relations:
+  belongs_to: shell
+  accountable: human
+not:
+- a human
+- a role
+status: accepted
+decided:
+  date: '2026-10-29'
+  by: Holger
+  where: 'commons.o#98, comment 6505618412: Adopted 29 October 2026 (the merge of commons.o#100)'

@@ -1,0 +1,11 @@
+id: escalation
+term: Escalation
+layer: workshop
+kind: concept
+definition: A work item by which a loop or a Body raises what it cannot settle within its mandate, naming the circle or the person it asks.
+why: The request for a decision is not the decision; it waits for someone named, while the Decision records what was decided.
+status: accepted
+decided:
+  date: '2026-10-23'
+  by: Holger
+  where: commons.o#72 (the issue type Escalation)

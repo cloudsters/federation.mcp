@@ -1,0 +1,107 @@
+# The workshop definition of Commons FLOW (flow.md R4): what a correctly set-up workshop is. Moved here from
+# instance/workshop/bodies/D4/workshop-definition.yml (0.8.0) as FLOW's setup schema, unchanged in content; Body D4
+# maintains it, and check_workshop.py checks a project against it.
+
+definition: workshop
+version: 0.8.2                   # 0.8.2: a Commons Workshop links the PEER|OPEN repository where one exists (flow-workshops R12; Holger, 29 Oct, #100 comment 6496414850) · 0.8.1: issue types Epic, Story, Task by their new names (Holger, 26 Oct, #83 comment 6418919927) · 0.8.0: generated from the CORE; Project Workshops (#84) · 0.7.0: views as Holger set them (23 Oct, #72) · 0.6.0: label decision taken back; Steward view in a Model Workshop (Holger, 23 Oct, #72) · 0.5.0: no view grouped by Labels (finding 23 Oct, #72) · 0.4.0: flow rules 1–3 (Holger, 23 Oct, #72) · 0.3.0: issue type Escalation (Holger, 23 Oct, #72) · 0.2.0: a Commons Workshop holds no Story of the model (W1; D1's F6 in #72)
+status: draft
+platform: github-projects-v2
+
+kinds:
+  model-workshop:
+    what: where the commons' model is worked on and released into its Commons Core (writes the model)
+    views:                       # in addition to the common views below
+      - {name: Steward, layout: table, filter: 'assignee:@me is:open', slice: Labels}   # every person sees their own items (Holger, 23 Oct)
+  commons-workshop:
+    what: where people and agents work with the model in their own context (never writes the model; what it
+      learns returns to the Model Workshop as a proposal item)
+    never_holds: [Story]           # a Story changes the model (W1); every one, open or closed, is a use delta
+  project-workshop:
+    what: any workshop an organisation sets up for its own purpose; free in name, same types, status and rules,
+      so that work can move between workshops (#84, G3)
+    stories_also_in: model-workshop  # a Story that changes the model is also an item of the CORE's Model Workshop, where its gate is
+
+generated_from_core:             # #84, G1–G5 — what the CORE supplies; everything else comes from this definition
+  labels: the CORE's Bodies (records of kind body in element 9's folder) — D0–D4, and F or S where gravitation formed them
+  repositories: the CORE's own repository (SEED|CORE) is always linked; a Commons Workshop also links the PEER|OPEN repository where the commons has one (flow-workshops R12); others when they hold items (topology, #74)
+  lifecycle: the CORE's stage (lifecycle/stage.yml) goes into the project's description, never into the Stage field
+  rule: plan (--plan), apply on the steward's word, check again (0 missing · 0 differs); never delete, report what is extra
+  by_hand: [Auto-add workflow, Slice by, the Type field in views]   # not reachable through the platform's API
+
+issue_types:                     # organisation level; names exact, because views filter on them
+  level: organisation
+  required:
+    - {name: Epic,    description: an outcome the circle is after; names its decision owner}
+    - {name: Story,   description: one change to the model; names the element it changes, as a path}
+    - {name: Task,    description: a concrete step inside a story}
+    - {name: Bug,     description: something that behaves other than specified}
+    - {name: Decision, description: 'outcome, scope, who decided under which mandate, the statement'}
+    - {name: Loop,    description: a standing item for one node of the value graph; what it finds becomes a story}
+    - {name: Escalation, description: a loop or Body raises something it cannot settle within its mandate; names the circle or person asked}
+  others: reported as extra, never removed by the tool
+
+labels:                          # repository level, in every repository whose items the workshop holds
+  level: repository
+  required:
+    - {name: D0, description: 'Body D0 — Perception & Identity. Work address; grants no authority.'}
+    - {name: D1, description: 'Body D1 — Purpose & System. Work address; grants no authority.'}
+    - {name: D2, description: 'Body D2 — Participation & Relationship. Work address; grants no authority.'}
+    - {name: D3, description: 'Body D3 — Proposition & Exchange. Work address; grants no authority.'}
+    - {name: D4, description: 'Body D4 — Production & Resilience. Work address; grants no authority.'}
+  # `decision` is taken back (Holger, 23 Oct): the type Decision says an item is a decision record, the assignee says
+  # who must act (flow rule 1). The label is kept, described as retired, and never asked for.
+  others: reported as extra, never removed by the tool; a label whose description begins with "retired" is counted, not listed
+
+fields:                          # project level; option order is the order of the buckets
+  - {name: Status, type: single_select, required: true,
+     options: [Backlog, Ready, In Progress, Validate, Done]}
+  - {name: Stage, type: single_select, required: true,
+     options: [Discover, Define, Ideate, Design, Build, Iterate]}
+  - {name: Size, type: single_select, required: false, options: [S, M, L]}
+  - {name: Needed by, type: date, required: false}
+
+views:                           # as Holger set them, 23 Oct; checked by the tool, set up by hand
+  # fields: the fields a view shows besides Title, at least. Type is not reported by the platform's API and is not
+  # checked; slice is set in the UI and not reported either — both are stated here and set by hand.
+  - {name: Direction, layout: board, filter: 'type:"Epic"', columns: Stage,
+     fields: [Type, Labels, Status, Sub-issues progress]}
+  - {name: Work,      layout: board, filter: '-type:"Epic"', columns: Status,
+     fields: [Type, Labels, Parent issue]}
+  - {name: Workshop,  layout: table, filter: 'is:open', group: Status, sort: Updated}
+views_never_group_by: [Labels]   # a view grouped by Labels made the whole project fail to load in the UI (23 Oct, #72);
+                                 # a per-Body view uses "Slice by: Labels" instead. Checked on every view, as differs
+
+workflows:                       # built-in project workflows
+  enabled: [Item added to project, Item closed, Auto-close issue, Auto-add sub-issues to project]
+  either: [Pull request linked to issue, Pull request merged]
+
+repositories: every repository whose items the project holds is linked to the project
+
+usage:                           # read from the items; reported as deltas of use, not of set-up
+  - every open item has an issue type
+  - every open item carries the label of at least one Body (D0–D4)
+  - every open Epic has a Stage
+
+flow:                            # the flow between people and machines — decided by Holger, 23 Oct (#72); violations are use deltas
+  assignee:                      # rule 1
+    means: the human who must act next; the handing-over Body sets it, whoever completes the step removes it
+    checks:
+      - a closed item still has an assignee (the step was completed, the field was not cleared)
+      - an open item in Validate has had no assignee for more than validate_unassigned_days (a result waits, nobody is asked)
+    validate_unassigned_days: 3  # read from the item's last update, the nearest the platform reports
+  status:                        # rule 2
+    Backlog: worth doing
+    Ready: the next verifiable result is clear
+    In Progress: a Body has taken it up
+    Validate: a result exists and is checked against evidence
+    Done: closed; the card stays until it is archived
+    not_a_status: waiting for the Steward — that is the assignee (rule 1)
+    checks:
+      - an open item has no Status
+      - an open item is Done, or a closed item is not Done
+  parent:                        # rule 3
+    means: 'a Story hangs under its Epic as a sub-issue, not only as "Parent: #n" in its text'
+    applies_to: [Story]
+    checks:
+      - an open Story has no parent issue
+      - an item names a parent in its text but has none linked

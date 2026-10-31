@@ -1,0 +1,147 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://commons.engineering/schemas/specification.schema.json",
+  "title": "specification",
+  "description": "The front matter of one specification of a commons, and the form of one requirement row (specification.md, parts 4 and 5).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "title",
+    "status",
+    "lang",
+    "touches",
+    "terms",
+    "schema",
+    "supersedes"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "description": "stable; never reused; the file is named <id>.md"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "status": {
+      "enum": [
+        "draft",
+        "decided",
+        "retired"
+      ]
+    },
+    "lang": {
+      "type": "string",
+      "pattern": "^[a-z]{2}$",
+      "description": "the one language of the file"
+    },
+    "touches": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+      },
+      "description": "ids of the specifications it touches"
+    },
+    "terms": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+      },
+      "description": "glossary ids it uses"
+    },
+    "schema": {
+      "type": "string",
+      "minLength": 1,
+      "description": "the path of its schema file"
+    },
+    "check": {
+      "type": "string",
+      "minLength": 1,
+      "description": "the path of its tool; omitted when every check is 'schema' or 'review'"
+    },
+    "examples": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "description": "paths of example files, when part 7 links them"
+    },
+    "supersedes": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "description": "paths of the texts it supersedes; may be empty"
+    },
+    "superseded_by": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "retired"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "superseded_by"
+        ]
+      }
+    }
+  ],
+  "$defs": {
+    "requirement": {
+      "description": "one row of the table in part 4",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "level",
+        "requirement",
+        "why",
+        "check"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^R[1-9][0-9]*$"
+        },
+        "level": {
+          "enum": [
+            "MUST",
+            "SHOULD"
+          ]
+        },
+        "requirement": {
+          "type": "string",
+          "minLength": 1,
+          "description": "one testable sentence"
+        },
+        "why": {
+          "type": "string",
+          "minLength": 1,
+          "description": "one or two sentences: the decision it carries"
+        },
+        "check": {
+          "type": "string",
+          "pattern": "^(schema|review|[a-z0-9]+(-[a-z0-9]+)*)$",
+          "description": "'schema', 'review', or a check id that part 6 lists for the specification's own tool"
+        }
+      }
+    }
+  }
+}

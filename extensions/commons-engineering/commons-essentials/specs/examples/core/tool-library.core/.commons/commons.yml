@@ -1,0 +1,12 @@
+id: tool-library
+name: Tool library
+code: TL
+instance_type: commons
+language: en
+structure: 0.3.0
+extensions:
+- id: commons-essentials
+  version: 0.1.0
+  primary: true
+locations:
+  people: people.yml

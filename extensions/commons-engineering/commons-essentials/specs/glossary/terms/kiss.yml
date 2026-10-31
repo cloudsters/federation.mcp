@@ -1,0 +1,25 @@
+id: kiss
+term: KISS (Keep it simple, stupid)
+layer: how
+kind: concept
+definition: 'The principle that a design passes three tests: leave out, it requires nothing it can do without and
+  every requirement names the function that breaks without it; repair, it requires nothing that a participant of the
+  commons cannot read, check and repair with plain files in git and the published checks; and robust, it is understood
+  from its files alone, carries a layperson working with an agent and one to n users, works for a while offline and
+  without its MCP, and is strict in what it generates and tolerant in what it reads.'
+why: 'Named in the original, after Kelly Johnson; stupid addresses the design, not the person using it. A design is
+  complete not when nothing more can be added but when nothing more can be left out without the function breaking,
+  after Antoine de Saint-Exupéry. What nobody needs is still kept by everyone, and what only a specialist can repair
+  belongs to the specialist, and those who use a commons see its files, not how they came about.'
+relations:
+  applies_to: specification
+not:
+- deferral
+- 'cutting function; what the function needs stays'
+- a sixth quality beside the five qualities
+status: accepted
+decided:
+  date: '2026-10-30'
+  by: Holger
+  where: 'commons.o#98, comment 6520286756: Adopted 30 October 2026 (with SPECIFICATION R29); comment 6524525898: the
+    third test, robust, decided 30 October 2026'

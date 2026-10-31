@@ -1,0 +1,439 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://commons.engineering/schemas/core.schema.json",
+  "title": "core",
+  "description": "The settings of a Commons CORE (core.md): .commons/commons.yml at the root of its repository. $defs hold the lifecycle stage, an event and a person of the party register.",
+  "type": "object",
+  "required": [
+    "id",
+    "name",
+    "code",
+    "instance_type",
+    "language",
+    "structure",
+    "extensions"
+  ],
+  "properties": {
+    "id": {
+      "$ref": "#/$defs/slug",
+      "description": "stable, never reused; how other COREs refer to this one"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "description": "the display name, in the commons' own words"
+    },
+    "code": {
+      "type": "string",
+      "pattern": "^[A-Z]{2}$",
+      "description": "the commons code; forms the Body handles @Dn-<code>"
+    },
+    "holder": {
+      "type": "string",
+      "description": "who holds this CORE where it is not the commons itself, for example an observer that keeps it from outside"
+    },
+    "perspective": {
+      "enum": [
+        "own",
+        "observed"
+      ],
+      "default": "own",
+      "description": "observed where the CORE is kept by an outside observer; the public-only limit of core-knowledge R12 applies then, and only then"
+    },
+    "instance_type": {
+      "enum": [
+        "commons",
+        "world"
+      ]
+    },
+    "slice": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "the horizon in years from now; 0 for the CORE itself, which may omit it"
+    },
+    "world": {
+      "$ref": "#/$defs/slug",
+      "description": "a world's name in its set; omitted when its slice has one world"
+    },
+    "world_of": {
+      "$ref": "#/$defs/slug",
+      "description": "a world: the id of the CORE it is projected from"
+    },
+    "as_of": {
+      "$ref": "#/$defs/date",
+      "description": "a world: the date of this projection, one generation"
+    },
+    "target": {
+      "type": "integer",
+      "description": "a world: derived as the year of as_of plus slice; written only for display, and it must agree"
+    },
+    "language": {
+      "type": "string",
+      "pattern": "^[a-z]{2}$",
+      "description": "the commons' own language"
+    },
+    "languages": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z]{2}$"
+      },
+      "description": "further languages its views are rendered in"
+    },
+    "structure": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$",
+      "description": "the version of the structure definition this CORE is on"
+    },
+    "extensions": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "version"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "version": {
+            "type": "string",
+            "minLength": 1
+          },
+          "primary": {
+            "const": true
+          }
+        }
+      },
+      "description": "the extensions it adopts, pinned; exactly one is primary"
+    },
+    "libraries": {
+      "type": "object",
+      "propertyNames": {
+        "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+      },
+      "additionalProperties": {
+        "type": "string",
+        "pattern": "^[^/]+/[^/]+$"
+      },
+      "description": "every library it installs from, as <owner>/<repo> (core.md R1, extension.md R12)"
+    },
+    "locations": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string",
+        "minLength": 1
+      },
+      "description": "structure keys moved from their default location: a folder, or owner/repo@rev:path"
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "where it draws on others: repositories, by owner/repo@rev:path"
+    },
+    "mcp": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "its MCP endpoints"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "instance_type": {
+            "const": "world"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "slice",
+          "world_of",
+          "as_of"
+        ],
+        "properties": {
+          "slice": {
+            "minimum": 1
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "reading": {
+      "type": "object",
+      "required": ["from", "read_at", "generator", "shells"],
+      "description": ".commons/federation.yml, the dated reading of what federation.mcp offers each shell, generated at each contact (R38); other metadata is tolerated, a user, an account or what one caller gets never",
+      "properties": {
+        "from": {"type": "string", "minLength": 1, "description": "the endpoint it was read from, access.yml's federation (mcp R24)"},
+        "read_at": {"type": "string", "minLength": 1, "description": "when it was read, an ISO 8601 date or time; its age is read beside it, never a deadline"},
+        "generator": {"type": "string", "minLength": 1, "description": "what took the reading"},
+        "shells": {
+          "type": "object",
+          "required": ["SEED", "CORE", "PEER", "OPEN", "DOCK", "ROAM"],
+          "propertyNames": {"enum": ["SEED", "CORE", "PEER", "OPEN", "DOCK", "ROAM"]},
+          "additionalProperties": {
+            "type": "object",
+            "properties": {"budget": {"type": "object", "additionalProperties": {"type": "integer", "minimum": 0}, "description": "each limit a number, as the producer emits it"}}
+          },
+          "description": "each shell of MODEL with its offer as the envelope carries it, mcp.schema.json $defs/offered (mcp R28): reads, writes, budget and sources where narrowed; never gets, never a user"
+        }
+      }
+    },
+    "slug": {
+      "type": "string",
+      "pattern": "^(?![0-9]+$)[a-z0-9]+([.-][a-z0-9]+)*$",
+      "description": "never digits only: a segment of digits only is a horizon (R25)"
+    },
+    "date": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    },
+    "reference": {
+      "type": "string",
+      "pattern": "^(github:[A-Za-z0-9-]+|person:P_[0-9]{4,})$"
+    },
+    "stage": {
+      "type": "object",
+      "required": [
+        "stage",
+        "since",
+        "event"
+      ],
+      "properties": {
+        "stage": {
+          "enum": [
+            "Fork",
+            "Boot",
+            "Seed",
+            "Active",
+            "Gathering",
+            "Established",
+            "Mature"
+          ]
+        },
+        "since": {
+          "$ref": "#/$defs/date"
+        },
+        "event": {
+          "type": "string",
+          "description": "the stage-change or founding event that set it"
+        }
+      }
+    },
+    "event": {
+      "type": "object",
+      "required": [
+        "id",
+        "date",
+        "recorded",
+        "kind",
+        "subject",
+        "title",
+        "by"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "date": {
+          "$ref": "#/$defs/date"
+        },
+        "recorded": {
+          "type": "string",
+          "minLength": 10
+        },
+        "kind": {
+          "enum": [
+            "founding",
+            "stage-change",
+            "encounter",
+            "decision",
+            "milestone",
+            "correction",
+            "not-selected"
+          ]
+        },
+        "subject": {
+          "enum": [
+            "commons",
+            "model"
+          ]
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "by": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/reference"
+          }
+        },
+        "with": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/reference"
+          }
+        },
+        "reported_by": {
+          "$ref": "#/$defs/reference"
+        },
+        "changed": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "model_revision": {
+          "type": "string"
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "item": {
+          "type": "string"
+        },
+        "source": {
+          "type": "string"
+        },
+        "stage": {
+          "type": "object",
+          "required": [
+            "from",
+            "to"
+          ]
+        },
+        "corrects": {
+          "type": "string"
+        },
+        "decision": {
+          "type": "string"
+        },
+        "world_of": {
+          "$ref": "#/$defs/slug"
+        },
+        "archetype": {
+          "type": "string",
+          "description": "for a not-selected event: the archetype offered, as <library>/<extension>@<version>#<kind>:<slug> (extension.md)"
+        },
+        "expected": {
+          "type": "string",
+          "pattern": "^expectation:[A-Za-z0-9._-]+$",
+          "description": "the expected statement whose difference this event decided, by its expectation id (core-knowledge R7)"
+        }
+      },
+      "anyOf": [
+        {
+          "required": [
+            "item"
+          ]
+        },
+        {
+          "required": [
+            "source"
+          ]
+        }
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "stage-change"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "stage"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "correction"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "corrects"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "decision"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "decision"
+            ]
+          }
+        }
+      ]
+    },
+    "person": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "name",
+        "role"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^P_[0-9]{4,}$"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "role": {
+          "type": "string",
+          "minLength": 1,
+          "description": "a role, or a Post as post:<slug>"
+        },
+        "contact": {
+          "type": "string",
+          "description": "one way to reach them"
+        }
+      }
+    },
+    "people": {
+      "type": "object",
+      "required": [
+        "people"
+      ],
+      "properties": {
+        "people": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/person"
+          }
+        }
+      }
+    }
+  }
+}

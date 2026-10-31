@@ -1,0 +1,13 @@
+id: commons-engineering
+term: Commons Engineering
+layer: why
+kind: concept
+definition: The discipline of building and keeping commons, open to anyone and usable without any operator.
+why: 'The discipline is part of the Commons, what the Federation holds in common; the Federation is the interest
+  body of all stakeholders of the Commons. Written the Commons, capital and without brackets, it is exactly that
+  one, never [commons], any commons.'
+status: accepted
+decided:
+  date: '2026-10-29'
+  by: Holger
+  where: 'commons.o#98, comment 6505618412: Adopted 29 October 2026 (the merge of commons.o#100)'

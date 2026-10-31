@@ -1,0 +1,14 @@
+name: briefing
+kind: briefing
+variant: full
+audience: the keepers and the members
+promise: the whole library, who it is, how it works and where it is heading
+way_back: a proposal item in the Commons Workshop
+sections:
+- d0.perception-to-mandate
+- d4.demand-to-fulfillment
+- lifecycle.path
+formats:
+- markdown
+languages:
+- en

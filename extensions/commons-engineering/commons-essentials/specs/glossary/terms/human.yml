@@ -1,0 +1,17 @@
+id: human
+term: Human
+layer: how
+kind: concept
+definition: A person, and the only one who can be accountable in a commons.
+why: 'Human is an ordinary word; here it carries what no account, agent or tool can: accountability. A human acts
+  through a user and takes part in Bodies through Posts.'
+relations:
+  acts_through: user
+not:
+- a user (the account)
+- a role
+status: accepted
+decided:
+  date: '2026-10-29'
+  by: Holger
+  where: 'commons.o#98, comment 6505618412: Adopted 29 October 2026 (the merge of commons.o#100)'

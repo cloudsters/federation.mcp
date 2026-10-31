@@ -1,0 +1,9 @@
+# The register of the tool library's graph (graph.md R1-R3); the commons writes it.
+sources:
+  - {id: registry,        kind: registry,  ref: registry/,                  class: member}
+  - {id: knowledge,       kind: knowledge, ref: knowledge/,                 class: member}
+  - {id: commons-library, kind: patterns,  ref: patterns/commons-library/,  class: public, pin: lock}
+  - {id: own-patterns,    kind: patterns,  ref: patterns/,                  class: member}
+  - {id: blueprint,       kind: views,     ref: views/blueprint.yml,        class: public}
+  - {id: card,            kind: views,     ref: views/card/,                class: public}
+  - {id: briefing,        kind: views,     ref: views/briefing/,            class: member}

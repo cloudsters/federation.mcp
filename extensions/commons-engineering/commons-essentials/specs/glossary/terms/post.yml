@@ -1,0 +1,15 @@
+id: post
+term: Post
+layer: how
+kind: concept
+definition: A delimited responsibility within a Body, held by a human or an agent, that may be shared.
+why: 'An agent''s Post answers to a human, since only a human is accountable. HR connects through it, a Post mapping to
+  a position by its identifier, without the model becoming an HR system.'
+relations:
+  part_of: body
+  held_by: [human, agent]
+status: accepted
+decided:
+  date: '2026-10-29'
+  by: Holger
+  where: 'commons.o#98, comment 6505618412: Adopted 29 October 2026 (the merge of commons.o#100); first decided 2026-10-18, workshop/_drafts/DECISION_POSITIONS_JOBS_ROLES.md §10 (K1, K4)'

@@ -1,0 +1,12 @@
+id: commons-library
+term: Commons LIBRARY
+layer: what
+kind: repository
+definition: 'What a commons installs: the released extensions, public.'
+relations:
+  is_a: component
+status: accepted
+decided:
+  date: '2026-10-29'
+  by: Holger
+  where: 'commons.o#98, comment 6505618412: Adopted 29 October 2026 (the merge of commons.o#100)'

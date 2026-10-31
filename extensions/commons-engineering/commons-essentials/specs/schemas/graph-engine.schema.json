@@ -1,0 +1,385 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "graph-engine.schema.json",
+  "title": "Commons GRAPH, the Graph Engine: run.yml of one run package",
+  "type": "object",
+  "required": [
+    "id",
+    "engine",
+    "cut",
+    "method",
+    "policy",
+    "parent",
+    "states",
+    "outputs"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9.-]*$"
+    },
+    "engine": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9-]+/[A-Za-z0-9._-]+@[^\\s:@]+$"
+    },
+    "cut": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/cut"
+      }
+    },
+    "method": {
+      "type": "object",
+      "required": [
+        "kind",
+        "procedure"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "enum": [
+            "model",
+            "lexical",
+            "stated-only"
+          ]
+        },
+        "procedure": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9.-]*@[0-9][0-9.]*$"
+        },
+        "params": {
+          "type": "object"
+        },
+        "models": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "tools": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "policy": {
+      "type": "object",
+      "required": [
+        "classes",
+        "where"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "classes": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "grant": {
+          "type": "object",
+          "required": [
+            "source",
+            "purpose",
+            "recipient"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "source": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "purpose": {
+              "type": "string"
+            },
+            "recipient": {
+              "type": "string"
+            },
+            "where": {
+              "type": "string",
+              "description": "the decision event of the CORE that records the grant, lifecycle/events/<id>.yml"
+            }
+          }
+        },
+        "where": {
+          "type": "string",
+          "minLength": 1,
+          "description": "local, or the hosted recipient"
+        },
+        "budget": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "parent": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "states": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "state",
+          "at"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "state": {
+            "enum": [
+              "ordered",
+              "computing",
+              "computed",
+              "checked",
+              "released",
+              "superseded",
+              "paused",
+              "failed",
+              "rejected"
+            ],
+            "description": "ordered, computed, released, superseded or failed; computing, paused, checked and rejected only in a record of an earlier form (R6)"
+          },
+          "at": {
+            "type": "string"
+          },
+          "by": {
+            "type": "string"
+          },
+          "where": {
+            "type": "string"
+          },
+          "note": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "findings": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "ledger": {
+      "type": "object"
+    },
+    "outputs": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": [
+          "digest"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "digest": {
+            "type": "string",
+            "pattern": "^sha256:[0-9a-f]{64}$"
+          },
+          "location": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "aggregates": {
+      "type": "array",
+      "description": "for a run across commons: its aggregates (graph.md R18, R19)",
+      "items": {
+        "type": "object"
+      }
+    },
+    "key": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$",
+      "description": "the reuse key over every input's digest, the method and the policy"
+    }
+  },
+  "$defs": {
+    "cut": {
+      "type": "object",
+      "required": [
+        "source",
+        "digest"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "source": {
+          "$ref": "#/$defs/id"
+        },
+        "rev": {
+          "type": "string",
+          "minLength": 1
+        },
+        "run": {
+          "type": "string",
+          "minLength": 1,
+          "description": "the foreign released run a source carries"
+        },
+        "digest": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "read_at": {
+          "type": "string",
+          "minLength": 1,
+          "description": "the time the source's working files were read, where they differ from its commit"
+        }
+      },
+      "oneOf": [
+        {
+          "required": [
+            "rev"
+          ]
+        },
+        {
+          "required": [
+            "read_at"
+          ]
+        }
+      ]
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9.-]*$"
+    },
+    "edge": {
+      "type": "object",
+      "required": [
+        "from",
+        "to",
+        "kind",
+        "run",
+        "method",
+        "rests_on",
+        "class"
+      ],
+      "additionalProperties": false,
+      "not": {
+        "required": [
+          "confidence"
+        ]
+      },
+      "properties": {
+        "from": {
+          "type": "string"
+        },
+        "to": {
+          "type": "string"
+        },
+        "kind": {
+          "type": "string"
+        },
+        "run": {
+          "type": "string"
+        },
+        "method": {
+          "enum": [
+            "model",
+            "lexical",
+            "stated-only"
+          ]
+        },
+        "score": {
+          "type": "number"
+        },
+        "score_is": {
+          "type": "string"
+        },
+        "rests_on": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9.-]*:.+$"
+          },
+          "description": "<source>:<path or node id>, each a source of the cut"
+        },
+        "class": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "array",
+              "minItems": 2,
+              "items": {
+                "type": "string"
+              },
+              "uniqueItems": true
+            }
+          ],
+          "description": "public, one class, or the sorted list of every restriction of its inputs"
+        }
+      },
+      "dependentRequired": {
+        "score": [
+          "score_is"
+        ]
+      }
+    },
+    "proposal": {
+      "type": "object",
+      "required": [
+        "source",
+        "node",
+        "field",
+        "target",
+        "edge",
+        "state",
+        "class"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "source": {
+          "type": "string"
+        },
+        "node": {
+          "type": "string"
+        },
+        "field": {
+          "type": "string"
+        },
+        "target": {
+          "type": "string"
+        },
+        "edge": {
+          "type": "string"
+        },
+        "state": {
+          "enum": [
+            "open",
+            "taken",
+            "declined"
+          ]
+        },
+        "class": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "array",
+              "minItems": 2,
+              "items": {
+                "type": "string"
+              },
+              "uniqueItems": true
+            }
+          ],
+          "description": "public, one class, or the sorted list of every restriction of its inputs"
+        }
+      }
+    }
+  }
+}

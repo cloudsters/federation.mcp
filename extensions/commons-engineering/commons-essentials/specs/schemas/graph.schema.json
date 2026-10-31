@@ -1,0 +1,251 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "graph.schema.json",
+  "title": "Commons GRAPH: the source register graph/sources.yml",
+  "type": "object",
+  "required": [
+    "sources"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "sources": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/source"
+      }
+    }
+  },
+  "$defs": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9.-]*$"
+    },
+    "source": {
+      "type": "object",
+      "required": [
+        "id",
+        "kind",
+        "ref",
+        "class"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "kind": {
+          "type": "string",
+          "pattern": "^[a-z][a-z-]*$",
+          "description": "an open word; part 5 names the kinds with a reader"
+        },
+        "ref": {
+          "type": "string",
+          "minLength": 1,
+          "description": "an area or folder of the CORE, owner/repo@rev[:path], or a reading's id"
+        },
+        "class": {
+          "type": "string",
+          "pattern": "^[a-z][a-z-]*$",
+          "description": "public, member, or a class the commons defines"
+        },
+        "pin": {
+          "const": "lock"
+        },
+        "grant": {
+          "type": "string",
+          "minLength": 1,
+          "description": "for a source of another commons: where its grant is recorded"
+        },
+        "rhythm": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "cut": {
+      "type": "object",
+      "required": [
+        "source",
+        "digest"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "source": {
+          "$ref": "#/$defs/id"
+        },
+        "rev": {
+          "type": "string",
+          "minLength": 1
+        },
+        "run": {
+          "type": "string",
+          "minLength": 1,
+          "description": "the foreign released run a source carries"
+        },
+        "digest": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "read_at": {
+          "type": "string",
+          "minLength": 1,
+          "description": "the time the source's working files were read, where they differ from its commit"
+        }
+      },
+      "oneOf": [
+        {
+          "required": [
+            "rev"
+          ]
+        },
+        {
+          "required": [
+            "read_at"
+          ]
+        }
+      ]
+    },
+    "answer": {
+      "type": "object",
+      "required": [
+        "question",
+        "cut",
+        "runs",
+        "method",
+        "candidates",
+        "silences"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "question": {
+          "type": "string",
+          "minLength": 1
+        },
+        "cut": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/cut"
+          }
+        },
+        "runs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "method": {
+          "enum": [
+            "stated-only",
+            "lexical",
+            "model"
+          ]
+        },
+        "candidates": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "id",
+              "via"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "file": {
+                "type": "string"
+              },
+              "via": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "silences": {
+          "type": "object",
+          "required": [
+            "not_held",
+            "unsighted",
+            "partial"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "not_held": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "unsighted": {
+              "type": "boolean",
+              "description": "whether anything was withheld from this caller; never what, never how much"
+            },
+            "partial": {
+              "type": "array",
+              "description": "what the answer read only partly: a source stale since a run, a permitted source not read with its reason, the count its budget left out (R13)",
+              "items": {
+                "type": "object",
+                "required": [
+                  "why"
+                ],
+                "additionalProperties": false,
+                "properties": {
+                  "why": {
+                    "enum": [
+                      "stale",
+                      "unread",
+                      "budget"
+                    ]
+                  },
+                  "source": {
+                    "type": "string"
+                  },
+                  "reason": {
+                    "type": "string"
+                  },
+                  "count": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "aggregate": {
+      "type": "object",
+      "required": [
+        "count",
+        "threshold",
+        "unsighted",
+        "digest"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "threshold": {
+          "type": "integer",
+          "minimum": 5
+        },
+        "digest": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "unsighted": {
+          "type": "boolean",
+          "description": "the union of its members' withheld findings"
+        }
+      }
+    }
+  }
+}

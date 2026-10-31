@@ -1,0 +1,13 @@
+{
+  "definitions": {
+    "blueprint": "0.1.0",
+    "view": "card",
+    "structure": "0.3.0"
+  },
+  "inputs": {
+    "views/card/view.yml": "bf54a699b2b99eecfa01da3432fc272b3eb5fcc766554e23e31b460e2655b276"
+  },
+  "outcomes": {
+    "d0.perception-to-mandate": "covered"
+  }
+}

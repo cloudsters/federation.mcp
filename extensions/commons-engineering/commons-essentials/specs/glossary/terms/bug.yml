@@ -1,0 +1,10 @@
+id: bug
+term: Bug
+layer: workshop
+kind: work-item
+definition: Something that behaves other than specified.
+status: accepted
+decided:
+  date: '2026-10-16'
+  by: Holger
+  where: issue types of cloudsters and Commons-Engineering

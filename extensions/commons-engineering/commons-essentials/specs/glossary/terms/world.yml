@@ -1,0 +1,15 @@
+id: world
+term: World
+layer: how
+kind: concept
+definition: A full future state a commons could be in; it never binds a role, a budget or a person, and it names
+  the moves open in it.
+why: A pole of the future is a state, not a rule set; the two functions the old word carried are stated, not implied.
+not:
+- Game
+- game pole
+status: accepted
+decided:
+  date: '2026-10-16'
+  by: Holger
+  where: cloudsters.o#30

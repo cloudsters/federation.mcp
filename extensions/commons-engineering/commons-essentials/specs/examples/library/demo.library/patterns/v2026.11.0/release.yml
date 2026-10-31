@@ -1,0 +1,19 @@
+kind: extract
+library: demo-library
+version: v2026.11.0
+made_in: Commons-Engineering/commons.o@3c4d5e6f708192a3b4c5d6e7f8091a2b3c4d5e6f
+event: Commons-Engineering/commons.o@3c4d5e6f708192a3b4c5d6e7f8091a2b3c4d5e6f:lifecycle/events/2026-11-01-release-extract.yml
+gate:
+  result: pass
+  check: Commons-Engineering/commons.o@53834fc:specs/tools/check_library.py
+graph_run: demo-2026-11-01
+extractor: Commons-Engineering/commons.o@main:specs/examples/library/extract.py
+policy: Commons-Engineering/commons.o@main:specs/examples/library/policy.yml
+scope: orbits 0-3
+digest: sha256:71662fc210fe9a5417a6a65abd202f2281ea8f4c3a00efac1d0d87e9a9ea6dba
+parts:
+  patterns:
+    class: public
+    digest: sha256:a52de8206cfc71475f3cc3a8a708e10ad0d15d1fa4fe7783ae08e533398828fd
+licence: CC-BY-SA-4.0
+answers: Commons-Engineering/commons.o

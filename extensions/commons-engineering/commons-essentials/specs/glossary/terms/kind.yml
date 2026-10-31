@@ -1,0 +1,12 @@
+id: kind
+term: Kind
+layer: what
+kind: concept
+definition: The type of commons an extension is made for and a commons belongs to, such as a hospital, a city or a garden; a commons may be of several kinds.
+why: It names what the engine's account step called an archetype of a commons, so that archetype keeps its one meaning. Proposed by D0-CE in commons.o#90 (comment 6420921361); not yet decided.
+relations:
+  of: commons
+not:
+- archetype
+- the kind field of a record, which types the record
+status: draft

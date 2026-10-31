@@ -1,0 +1,10 @@
+id: lighthouse
+term: Lighthouse
+layer: what
+kind: artefact
+definition: Our publication of an organisation's model from public data; the organisation may become its sponsor.
+status: accepted
+decided:
+  date: '2026-10-16'
+  by: Holger
+  where: target_architecture §11

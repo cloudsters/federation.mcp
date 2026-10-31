@@ -1,0 +1,8 @@
+kind: touchpoint
+slug: lending-desk
+title: Lending desk
+stakeholder: member
+journey: borrowing-a-tool
+steps:
+- lending/hand-out
+- lending/take-back

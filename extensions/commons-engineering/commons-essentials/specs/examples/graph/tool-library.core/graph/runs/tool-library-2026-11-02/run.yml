@@ -1,0 +1,60 @@
+# one run package of the Graph Engine (graph-engine R4, R5); only the engine writes here
+id: tool-library-2026-11-02
+engine: Commons-Engineering/graph-engine@v0.1.0
+cut:
+- source: registry
+  rev: 020a5f9efacb6531a49f862b5a5b995b3f85bc15
+  digest: sha256:3d443a646c2a4c353565a59aff704b4f034cd56eb9bfe11ffd90069c99d713e9
+- source: knowledge
+  rev: 020a5f9efacb6531a49f862b5a5b995b3f85bc15
+  digest: sha256:4407d4066b3c654f2353cbf591b2776d5afc9f681b6986ff4880304fc653591b
+- source: commons-library
+  rev: Commons-Engineering/commons-library@v2026.11.0
+  run: federation-2026-11-01
+  digest: sha256:c5681befc621e3efccb29f3500abd307ce77cc8f8c4f087246be749bee336fee
+- source: own-patterns
+  rev: 020a5f9efacb6531a49f862b5a5b995b3f85bc15
+  digest: sha256:8eb61afd56d740fce33de3875c495db3f6c2f67294b613320c0c4c70f693ffda
+method:
+  kind: lexical
+  procedure: lexical-overlap@1
+  params:
+    pairs: capabilities and value streams, own patterns -> patterns of the extract
+    min_shared: 2
+    min_shared_own: 1
+  models: []
+  tools:
+  - answer_graph.py readers, graph.md part 5
+policy:
+  classes:
+    registry: member
+    knowledge: member
+    commons-library: public
+    own-patterns: member
+  where: local
+  budget: 'none needed: a program, no model call'
+parent: null
+states:
+- state: ordered
+  at: '2026-11-02T08:00:00Z'
+- state: computing
+  at: '2026-11-02T08:00:01Z'
+- state: computed
+  at: '2026-11-02T08:00:02Z'
+- state: checked
+  at: '2026-11-02T08:00:03Z'
+- state: released
+  at: '2026-11-02T09:15:00Z'
+  by: the tool library's steward
+  where: tool-library/tool-library.core#3
+findings:
+- 3 computed edges, 2 proposals; every endpoint a node of the cut; every source unchanged
+ledger:
+  model_calls: 0
+  seconds: 1
+outputs:
+  edges.jsonl:
+    digest: sha256:ca5dfea35bbe6ef81175fbc5c591247dc9851e2943af6ac11eb1e3ec200b93db
+  proposals.yml:
+    digest: sha256:4c24088d7f8f73a66fcc5504f5d88e17b2e5c2d7a21a91f9922581bc51e67711
+key: sha256:f5ebe9a2f5e5d21d9b9ecb9e4d5069663cfeb3a41582eb79c2470030d797cf66

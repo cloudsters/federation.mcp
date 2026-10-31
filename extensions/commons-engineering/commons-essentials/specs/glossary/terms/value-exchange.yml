@@ -1,0 +1,12 @@
+id: value-exchange
+term: Value Exchange
+layer: how
+kind: element
+definition: 'Element 4: what is offered at a touchpoint and what returns.'
+why: An exchange that states only the outbound half is a proposition, not an exchange.
+relations:
+  part_of: scaffold
+  at: touchpoint
+not:
+- value proposition
+status: draft

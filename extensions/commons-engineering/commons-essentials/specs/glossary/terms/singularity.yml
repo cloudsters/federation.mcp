@@ -1,0 +1,8 @@
+id: singularity
+term: Singularity
+layer: why
+kind: concept
+definition: The point from which a commons sees itself as a whole; Pattern 0.
+relations:
+  is_orbit: orbit
+status: draft

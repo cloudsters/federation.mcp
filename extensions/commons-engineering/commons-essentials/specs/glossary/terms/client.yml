@@ -1,0 +1,18 @@
+id: client
+term: Client
+layer: how
+kind: concept
+definition: 'The tool an agent runs in, of any vendor, which holds no role, no right and no memory the commons relies
+  on.'
+why: 'Nothing a commons needs in order to run depends on a provider: a role starts from its start file and its
+  handover note, and a client is named only by its label.'
+relations:
+  runs: agent
+not:
+- an agent
+- a customer
+status: accepted
+decided:
+  date: '2026-10-29'
+  by: Holger
+  where: 'commons.o#98, comment 6505618412: Adopted 29 October 2026 (the merge of commons.o#100)'

@@ -1,0 +1,9 @@
+# generated: what this CORE installed, with the record digest the library's index gives (LIBRARY R9)
+extensions:
+- id: commons-engineering/commons-essentials
+  version: 0.2.0
+  origin: cloudsters/federation.library@d59dfbe3b1995c8209465ca5ef158d540c6bc9a1:commons-essentials/0.2.0
+  record: sha256:429b0a1787dfdf205a17c3f36401555d6c98a4013b42e4bea9525c7bc5773472
+  installed:
+  - essentials
+  served: []

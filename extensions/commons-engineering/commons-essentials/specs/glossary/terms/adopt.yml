@@ -1,0 +1,15 @@
+id: adopt
+term: Adopt
+layer: what
+kind: concept
+definition: To take an archetype from an installed extension into the commons' own registry, unchanged or changed; a changed adoption is marked adapted.
+why: A commons rarely takes an offer unchanged. An adopted entry names its origin (<provider>/<pack>@<version>#<archetype>) and what it changes, so every departure from the extension stays visible, entry by entry. One step of a configuration.
+relations:
+  part_of: configuration
+  takes: archetype
+  from: extension
+  counterpart: not-selected
+not:
+- activate
+- install
+status: draft

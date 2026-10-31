@@ -1,0 +1,20 @@
+id: usage
+term: Usage
+layer: what
+kind: concept
+definition: 'How a line of a bill of materials holds its child, one of four: installed, a read-only copy held to its
+  digest; served, delivered and never copied, its inner bill its provider''s; read, a system observed under a grant;
+  adopted, taken into the commons'' own registry, unchanged or adapted.'
+why: 'A line carries no quantity; its usage says what the commons holds of the child and who answers for the child''s
+  own bill. Essentials, specifications and pattern extracts are installed, enhanced is served, FABRIC''s sources are
+  read, and archetypes are adopted.'
+relations:
+  of: bill-of-materials
+  set_by: configuration
+not:
+- a quantity
+status: accepted
+decided:
+  date: '2026-10-30'
+  by: Holger
+  where: 'commons.o#107, comment 6519835234: Adopted 30 October 2026 (step 1 of the bill of materials)'

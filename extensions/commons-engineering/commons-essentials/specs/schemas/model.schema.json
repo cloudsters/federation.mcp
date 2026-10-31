@@ -1,0 +1,691 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://commons.engineering/schemas/model.schema.json",
+  "title": "model",
+  "description": "The grammar of any commons (model.md): a model is a set of records of the nine elements, and addresses from outside point into it. Extensions may add fields; they may not redefine these.",
+  "type": "object",
+  "required": [
+    "records"
+  ],
+  "properties": {
+    "records": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/record"
+      }
+    },
+    "addresses": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/address"
+      }
+    }
+  },
+  "x-dimension-of": {
+    "perception-to-mandate": "d0",
+    "purpose-to-portfolio": "d1",
+    "value-to-sustainability": "d1",
+    "portfolio-to-system": "d1",
+    "participant-to-community": "d2",
+    "collaboration-to-automation": "d2",
+    "contributor-to-succession": "d2",
+    "discovery-to-usage": "d3",
+    "interest-to-relationship": "d3",
+    "proposition-to-audience": "d3",
+    "demand-to-fulfillment": "d4",
+    "source-to-alliance": "d4",
+    "acquire-to-retire": "d4"
+  },
+  "$defs": {
+    "slug": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+([.-][a-z0-9]+)*$"
+    },
+    "ref": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "a slug of another record; null is a gap"
+    },
+    "refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "slugs of other records; an empty list is a gap"
+    },
+    "identifier": {
+      "type": "string",
+      "pattern": "^(github:[A-Za-z0-9-]+|person:P_[0-9]{4,})$"
+    },
+    "dimension": {
+      "enum": [
+        "d0",
+        "d1",
+        "d2",
+        "d3",
+        "d4"
+      ]
+    },
+    "family": {
+      "enum": [
+        "perception-to-mandate",
+        "purpose-to-portfolio",
+        "value-to-sustainability",
+        "portfolio-to-system",
+        "participant-to-community",
+        "collaboration-to-automation",
+        "contributor-to-succession",
+        "discovery-to-usage",
+        "interest-to-relationship",
+        "proposition-to-audience",
+        "demand-to-fulfillment",
+        "source-to-alliance",
+        "acquire-to-retire"
+      ]
+    },
+    "record": {
+      "type": "object",
+      "required": [
+        "kind",
+        "slug",
+        "title"
+      ],
+      "properties": {
+        "kind": {
+          "enum": [
+            "stakeholder",
+            "journey",
+            "touchpoint",
+            "value-exchange",
+            "value-stream",
+            "capability",
+            "entity",
+            "solution",
+            "body",
+            "post"
+          ]
+        },
+        "slug": {
+          "$ref": "#/$defs/slug"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "stated_as": {
+          "type": "string",
+          "description": "the commons' own word for it, kept beside the grammar's name"
+        },
+        "adopted_from": {
+          "type": "string",
+          "pattern": "^[a-z0-9-]+/[a-z0-9-]+@[0-9]+\\.[0-9]+\\.[0-9]+(-rc\\.[0-9]+)?#[a-z-]+:[a-z0-9.-]+(/[a-z0-9.-]+)?$",
+          "description": "the archetype a commons adopted this record from (extension.md R23)"
+        },
+        "essential": {
+          "type": "boolean",
+          "description": "the commons holds this record as one that carries it: its decisive selection, read by the views (Part II)"
+        },
+        "start": {
+          "type": "boolean",
+          "description": "in an extension: the archetype belongs to the starting set (extension.md R24)"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "stakeholder"
+              }
+            }
+          },
+          "then": {
+            "$ref": "#/$defs/stakeholder"
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "journey"
+              }
+            }
+          },
+          "then": {
+            "$ref": "#/$defs/journey"
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "touchpoint"
+              }
+            }
+          },
+          "then": {
+            "$ref": "#/$defs/touchpoint"
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "value-exchange"
+              }
+            }
+          },
+          "then": {
+            "$ref": "#/$defs/value-exchange"
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "value-stream"
+              }
+            }
+          },
+          "then": {
+            "$ref": "#/$defs/value-stream"
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "capability"
+              }
+            }
+          },
+          "then": {
+            "$ref": "#/$defs/capability"
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "solution"
+              }
+            }
+          },
+          "then": {
+            "$ref": "#/$defs/solution"
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "body"
+              }
+            }
+          },
+          "then": {
+            "$ref": "#/$defs/body"
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "post"
+              }
+            }
+          },
+          "then": {
+            "$ref": "#/$defs/post"
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "entity"
+              }
+            }
+          },
+          "then": {
+            "$ref": "#/$defs/entity"
+          }
+        }
+      ]
+    },
+    "stakeholder": {
+      "properties": {
+        "shell": {
+          "type": "string"
+        }
+      }
+    },
+    "journey": {
+      "required": [
+        "stakeholder",
+        "mirrors"
+      ],
+      "properties": {
+        "stakeholder": {
+          "$ref": "#/$defs/ref"
+        },
+        "mirrors": {
+          "$ref": "#/$defs/ref",
+          "description": "the value stream this journey is the other side of"
+        },
+        "shells": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "the shells it crosses, in order"
+        }
+      }
+    },
+    "touchpoint": {
+      "required": [
+        "journey",
+        "steps"
+      ],
+      "properties": {
+        "stakeholder": {
+          "$ref": "#/$defs/ref",
+          "description": "optional; the journey's stakeholder, and it must agree"
+        },
+        "journey": {
+          "$ref": "#/$defs/ref"
+        },
+        "steps": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z0-9.-]+/[a-z0-9.-]+$"
+          }
+        },
+        "shell": {
+          "type": "string"
+        }
+      }
+    },
+    "value-exchange": {
+      "required": [
+        "touchpoint",
+        "offered",
+        "returned"
+      ],
+      "properties": {
+        "touchpoint": {
+          "$ref": "#/$defs/ref"
+        },
+        "offered": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "returned": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "an exchange states what returns; empty is a gap"
+        },
+        "shell": {
+          "type": "string"
+        }
+      }
+    },
+    "value-stream": {
+      "required": [
+        "family",
+        "steps"
+      ],
+      "properties": {
+        "family": {
+          "$ref": "#/$defs/family"
+        },
+        "dimension": {
+          "$ref": "#/$defs/dimension",
+          "description": "optional; must agree with the family's"
+        },
+        "steps": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/step"
+          }
+        }
+      }
+    },
+    "step": {
+      "type": "object",
+      "required": [
+        "slug",
+        "title",
+        "capabilities",
+        "entities"
+      ],
+      "properties": {
+        "slug": {
+          "$ref": "#/$defs/slug"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "capabilities": {
+          "$ref": "#/$defs/refs"
+        },
+        "entities": {
+          "$ref": "#/$defs/refs"
+        }
+      }
+    },
+    "capability": {
+      "required": [
+        "level",
+        "parent"
+      ],
+      "properties": {
+        "level": {
+          "enum": [
+            "L0",
+            "L1",
+            "L2",
+            "L3",
+            "L4",
+            "L5"
+          ]
+        },
+        "parent": {
+          "$ref": "#/$defs/ref",
+          "description": "null only at L0"
+        }
+      },
+      "not": {
+        "anyOf": [
+          {
+            "required": [
+              "dimension"
+            ]
+          },
+          {
+            "required": [
+              "family"
+            ]
+          }
+        ]
+      }
+    },
+    "solution": {
+      "required": [
+        "carries"
+      ],
+      "properties": {
+        "carries": {
+          "$ref": "#/$defs/refs"
+        }
+      }
+    },
+    "body": {
+      "required": [
+        "form",
+        "part_of",
+        "mandate"
+      ],
+      "properties": {
+        "form": {
+          "enum": [
+            "governing-body",
+            "organisational-unit"
+          ]
+        },
+        "part_of": {
+          "$ref": "#/$defs/ref",
+          "description": "always written: the Body it is part of, or null for the outermost Body"
+        },
+        "mandate": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "a reference to the one valid mandate; null is a gap"
+        },
+        "holds": {
+          "$ref": "#/$defs/refs",
+          "description": "capabilities at L0 to L3; absent or empty is a gap"
+        }
+      }
+    },
+    "post": {
+      "required": [
+        "of",
+        "responsibility",
+        "accountable",
+        "held_by"
+      ],
+      "properties": {
+        "of": {
+          "$ref": "#/$defs/ref"
+        },
+        "responsibility": {
+          "type": "string",
+          "minLength": 1
+        },
+        "accountable": {
+          "type": "string",
+          "pattern": "^(github:[A-Za-z0-9-]+|person:P_[0-9]{4,}|body:[a-z0-9.-]+)$"
+        },
+        "held_by": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/serving"
+          },
+          "description": "empty is a vacancy, a gap"
+        },
+        "safeguards": {
+          "type": "object",
+          "required": [
+            "evals",
+            "kill_switch",
+            "scope",
+            "review"
+          ],
+          "properties": {
+            "review": {
+              "type": "object",
+              "required": [
+                "by",
+                "every"
+              ],
+              "properties": {
+                "by": {
+                  "$ref": "#/$defs/identifier"
+                },
+                "every": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "serving": {
+      "type": "object",
+      "required": [
+        "kind",
+        "id"
+      ],
+      "properties": {
+        "kind": {
+          "enum": [
+            "human",
+            "agent"
+          ]
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "brief": {
+          "type": "string"
+        },
+        "on_behalf_of": {
+          "$ref": "#/$defs/identifier"
+        },
+        "since": {
+          "type": "string"
+        },
+        "until": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "human"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "id": {
+                "$ref": "#/$defs/identifier"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "agent"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "brief"
+            ]
+          }
+        }
+      ]
+    },
+    "address": {
+      "type": "object",
+      "required": [
+        "from",
+        "to",
+        "weight",
+        "status",
+        "source"
+      ],
+      "properties": {
+        "from": {
+          "type": "string",
+          "minLength": 1,
+          "description": "a reference to what refers: a path, owner/repo@rev:path, or a URL"
+        },
+        "to": {
+          "type": "object",
+          "required": [
+            "kind",
+            "slug"
+          ],
+          "properties": {
+            "kind": {
+              "enum": [
+                "dimension",
+                "family",
+                "step",
+                "stakeholder",
+                "journey",
+                "touchpoint",
+                "value-exchange",
+                "value-stream",
+                "capability",
+                "entity",
+                "solution",
+                "body",
+                "post"
+              ]
+            },
+            "slug": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "allOf": [
+            {
+              "if": {
+                "properties": {
+                  "kind": {
+                    "const": "step"
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "slug": {
+                    "pattern": "^[a-z0-9]+([.-][a-z0-9]+)*/[a-z0-9]+([.-][a-z0-9]+)*$"
+                  }
+                }
+              },
+              "else": {
+                "properties": {
+                  "slug": {
+                    "$ref": "#/$defs/slug"
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "weight": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "status": {
+          "enum": [
+            "proposed",
+            "ratified",
+            "rejected"
+          ]
+        },
+        "source": {
+          "enum": [
+            "machine",
+            "curated",
+            "human"
+          ],
+          "description": "the method that produced the mapping"
+        }
+      }
+    },
+    "entity": {
+      "not": {
+        "anyOf": [
+          {
+            "required": [
+              "dimension"
+            ]
+          },
+          {
+            "required": [
+              "family"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

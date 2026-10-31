@@ -1,0 +1,25 @@
+# A complete example of Commons LEARN: the tool library's curriculum, two paths over its blueprint
+# sections (examples/core/tool-library.core/views/blueprint.yml). Each path is one view definition,
+# views/<path>/view.yml; they are listed here together. The second presupposes the first.
+paths:
+- name: lending-basics
+  kind: curriculum
+  audience: anyone who wants to borrow or lend
+  promise: the learner can explain how lending works here and who carries it
+  way_back: a proposal through the library's MCP
+  sections:
+  - d0.perception-to-mandate
+  - d4.demand-to-fulfillment
+  formats: [markdown]
+  languages: [en]
+- name: keeping-the-desk
+  kind: curriculum
+  audience: a keeper who takes a turn at the lending desk
+  promise: the keeper can run the desk and knows where the library is heading
+  way_back: a proposal through the library's MCP
+  sections:
+  - d4.demand-to-fulfillment
+  - lifecycle.path
+  after: [lending-basics]
+  formats: [markdown]
+  languages: [en]

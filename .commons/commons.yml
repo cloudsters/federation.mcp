@@ -1,0 +1,14 @@
+# The pin of federation.mcp: it runs the released code of Commons Essentials, installed and checked (mcp R1, R22; library R9).
+# federation.mcp is a code repository, not a CORE: only the pin and the lock live here, never access.yml, users or credentials.
+id: federation-mcp
+name: federation.mcp
+code: FM
+instance_type: commons
+language: en
+structure: 0.3.0
+extensions:
+- id: commons-engineering/commons-essentials
+  version: 0.2.0
+  primary: true
+libraries:
+  commons-engineering: cloudsters/federation.library

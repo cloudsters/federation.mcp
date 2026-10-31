@@ -1,0 +1,15 @@
+{
+  "definitions": {
+    "blueprint": "0.1.0",
+    "view": "briefing",
+    "structure": "0.3.0"
+  },
+  "inputs": {
+    "views/briefing/view.yml": "e03cd3926e170d08ce10f6bcef55a2c0b26000f6ab0912f3d8b4a4ae29f663cd"
+  },
+  "outcomes": {
+    "d0.perception-to-mandate": "covered",
+    "d4.demand-to-fulfillment": "covered",
+    "lifecycle.path": "covered"
+  }
+}

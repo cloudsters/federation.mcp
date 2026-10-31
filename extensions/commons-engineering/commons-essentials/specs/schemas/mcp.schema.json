@@ -1,0 +1,144 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "mcp.schema.json",
+  "title": "Commons MCP: .commons/access.yml, its users by shell, and in $defs a user, the envelope of a result, a receipt and a use record",
+  "type": "object",
+  "required": ["classes", "federation", "users"],
+  "additionalProperties": false,
+  "properties": {
+    "classes": {
+      "type": "object",
+      "description": "each visibility class of the graph's register, personal data included, mapped to the outermost shell that may see it, CORE or further out: SEED and CORE read the whole repository (S6, R4)",
+      "properties": {"public": {"const": "ROAM", "description": "everyone's: never mapped inside ROAM (R4)"}},
+      "additionalProperties": {"$ref": "#/$defs/shell", "not": {"const": "SEED"}}
+    },
+    "public": {
+      "description": "ROAM's grant, for a caller that is no user; none when absent, opened only by the commons' own decision; it writes nothing, since a write needs a user (R13)",
+      "oneOf": [{"const": "none"},
+                {"type": "object", "additionalProperties": false,
+                 "properties": {"sources": {"$ref": "#/$defs/sources"}, "budget": {"$ref": "#/$defs/budget"}}}]
+    },
+    "federation": {"type": "string", "pattern": "^https://[^\\s]+$",
+                   "description": "the address of federation.mcp, the Federation's MCP serving the canon of the Commons (R24)"},
+    "shells": {
+      "type": "object",
+      "description": "each shell's grant, which its users share and may narrow, never widen; a shell not listed reads its cut and writes nothing",
+      "propertyNames": {"$ref": "#/$defs/shell"},
+      "additionalProperties": {"$ref": "#/$defs/scope", "unevaluatedProperties": false}
+    },
+    "users": {
+      "type": "array",
+      "description": "the users, each in one shell, and the entries of DOCK by pattern; the platform's teams are generated from this list (R26, R27)",
+      "items": {"$ref": "#/$defs/user"}
+    },
+    "budget": {"$ref": "#/$defs/budget"},
+    "keep": {"type": "integer", "minimum": 1, "description": "the days a use record is kept"}
+  },
+  "$defs": {
+    "shell": {"enum": ["SEED", "CORE", "PEER", "OPEN", "DOCK", "ROAM"]},
+    "date": {"type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"},
+    "digest": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "budget": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "depth": {"type": "integer", "minimum": 0},
+        "nodes": {"type": "integer", "minimum": 0},
+        "calls": {"type": "integer", "minimum": 0, "description": "per hour and user, across repeated calls"}
+      }
+    },
+    "sources": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+    "scope": {
+      "type": "object",
+      "properties": {
+        "sources": {"$ref": "#/$defs/sources"},
+        "writes": {"type": "array", "uniqueItems": true, "items": {"enum": ["commons", "model", "maker"]},
+                   "description": "where this grant may propose: the Commons Workshop, the Model Workshop, a release's maker; none when absent (R12)"},
+        "budget": {"$ref": "#/$defs/budget"}
+      }
+    },
+    "user": {
+      "type": "object",
+      "required": ["shell"],
+      "oneOf": [{"required": ["account"]}, {"required": ["match"]}],
+      "unevaluatedProperties": false,
+      "allOf": [{"$ref": "#/$defs/scope"},
+                {"if": {"required": ["account"], "properties": {"account": {"pattern": "^key:"}}}, "then": {"required": ["accountable"]}},
+                {"if": {"required": ["match"]}, "then": {"required": ["accountable", "expires"], "properties": {"shell": {"const": "DOCK"}}}}],
+      "properties": {
+        "account": {"type": "string", "pattern": "^(account|key):[A-Za-z0-9._@-]+$",
+                    "description": "as the sign-in reports it, a platform account or a key; never a secret"},
+        "match": {"type": "string", "pattern": "^\\*@[a-z0-9-]+(\\.[a-z0-9-]+)+$",
+                  "description": "an entry of DOCK: every account whose verified address is of the one domain of an organisation with which the commons holds a contract, until `expires`, the contract's end (R27)"},
+        "shell": {"$ref": "#/$defs/shell"},
+        "expires": {"$ref": "#/$defs/date"},
+        "accountable": {"type": "string", "pattern": "^account:[A-Za-z0-9._@-]+$",
+                        "description": "for a technical user: the account of the human user accountable for it; for an entry by pattern: the human user who holds the contract on the commons' side (R27)"}
+      },
+      "dependentRequired": {"accountable": ["expires"]}
+    },
+    "receipt": {
+      "type": "object",
+      "required": ["request", "item", "to", "state", "at"],
+      "additionalProperties": false,
+      "properties": {
+        "request": {"type": "string", "minLength": 1, "description": "the request id; the user is kept apart, as a digest (R13, R20)"},
+        "item": {"type": "string", "minLength": 1},
+        "to": {"enum": ["commons", "model", "maker"]},
+        "state": {"enum": ["sent", "created", "taken up", "accepted", "refused"]},
+        "at": {"type": "string"}
+      }
+    },
+    "use": {
+      "type": "object",
+      "required": ["at", "tool", "grant", "outcome", "cut"],
+      "additionalProperties": false,
+      "properties": {
+        "at": {"type": "string"},
+        "tool": {"type": "string"},
+        "grant": {"type": "string", "description": "the user's shell, or public"},
+        "outcome": {"enum": ["served", "refused", "budget"]},
+        "cut": {"$ref": "#/$defs/digest"}
+      }
+    },
+    "offered": {
+      "type": "object",
+      "required": ["reads", "writes", "budget"],
+      "additionalProperties": false,
+      "properties": {
+        "reads": {"type": "array", "items": {"type": "string"}, "description": "the visibility classes it reads"},
+        "sources": {"type": "array", "items": {"type": "string"}},
+        "writes": {"type": "array", "items": {"type": "string"}},
+        "budget": {"type": "object"}
+      }
+    },
+    "envelope": {
+      "type": "object",
+      "required": ["grant"],
+      "additionalProperties": false,
+      "properties": {
+        "grant": {"type": "string", "description": "the user's shell, or public; never the user"},
+        "offer": {"type": "object", "additionalProperties": {"$ref": "#/$defs/offered"}, "description": "what a grant of each shell gets, naming no user (R28)"},
+        "gets": {"$ref": "#/$defs/offered", "description": "what this caller gets, computed for the call (R28)"},
+        "answer": {"type": "object", "description": "a GRAPH answer, graph.schema.json $defs/answer"},
+        "node": {"type": "object", "description": "a node within the cut, its content as read at the cut and its visible edges, or nothing"},
+        "receipt": {"$ref": "#/$defs/receipt"},
+        "provenance": {
+          "type": "object", "required": ["cut", "runs", "method", "upstream"], "additionalProperties": false,
+          "properties": {
+            "cut": {"type": "array", "items": {"type": "object", "required": ["source", "digest"]}},
+            "runs": {"type": "array", "items": {"type": "string"}},
+            "method": {"enum": ["stated-only", "lexical", "model", "lookup", "write"]},
+            "upstream": {"type": "array", "items": {"type": "object", "required": ["source"], "additionalProperties": false,
+                         "properties": {"source": {"type": "string"}, "rev": {"type": "string"}, "unread": {"type": "string"}}}},
+            "resolved": {"type": "object", "description": "for a write: the destination the server resolved"}
+          }
+        },
+        "refused": {"type": "string", "description": "why nothing was served, naming nothing outside the caller's cut"}
+      },
+      "if": {"required": ["refused"]},
+      "then": {"not": {"anyOf": [{"required": ["provenance"]}, {"required": ["answer"]}, {"required": ["node"]}, {"required": ["receipt"]}]}},
+      "else": {"required": ["provenance"]}
+    }
+  }
+}

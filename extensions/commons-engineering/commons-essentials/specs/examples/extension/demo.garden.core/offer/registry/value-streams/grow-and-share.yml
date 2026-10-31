@@ -1,0 +1,16 @@
+kind: value-stream
+slug: grow-and-share
+title: Grow and share
+family: demand-to-fulfillment
+start: true
+steps:
+- slug: sow
+  title: Sow
+  capabilities:
+  - sowing
+  entities:
+  - plot
+binds:
+- source: S1
+  edition: '2024'
+  jurisdiction: global

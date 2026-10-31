@@ -1,0 +1,11 @@
+id: story
+term: Story
+layer: workshop
+kind: work-item
+definition: One outcome that can be delivered and accepted on its own, under an epic.
+why: 'In the graph: one delta with its resolution path; done when the loop that raised it no longer raises it.'
+status: accepted
+decided:
+  date: '2026-10-16'
+  by: Holger
+  where: issue types of cloudsters and Commons-Engineering

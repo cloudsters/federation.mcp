@@ -1,0 +1,207 @@
+# A complete board of Commons FLOW: every work object once, an Office's recorded word, a loop's escalation, a
+# position and an accepted, closed Task. It passes check_flow.py with gaps only.
+commons: tool-library
+workshop:
+  kind: model
+  name: Tool library — Model Workshop
+  core: tool-library
+humans:
+- ana
+- ben
+limits:
+  ana: 5
+  ben: 5
+items:
+- ref: tool-library/tool-library.core#1
+  type: Epic
+  title: Lending runs without the founder
+  state: open
+  status: In Progress
+  labels:
+  - D4
+  parent: null
+  body: |
+    ## Goal
+    Anchor: `value-stream:lending` · changes who carries lending, from Ana alone to the desk Body
+    ## Approach
+    Hand the lending steps to the desk Body one by one.
+    ## Deliverables
+    - the desk Body holds `capability:loan-handling`
+    ## Definition of Done
+    - a month of loans runs with Ana only accepting
+  comments:
+  - author: ana
+    body: '@D4-TL · L1 · C1 — delivery: taken up: the Epic, by the desk agent'
+  - author: ben
+    body: '@ben — position: Deliverables should also name the reminder Body, because overdue tools are part of lending'
+  anchors:
+  - value-stream:lending
+  stroke: changes
+  carried_by: body:d4
+  memberships:
+  - kind: model
+    name: Tool library — Model Workshop
+  comments_complete: true
+  stage: Define
+- ref: tool-library/tool-library.core#2
+  type: Story
+  title: Returns are logged by the desk
+  state: open
+  status: Validate
+  labels:
+  - D4
+  assignees:
+  - ana
+  parent: tool-library/tool-library.core#1
+  body: |
+    ## Goal
+    Anchor: `capability:loan-handling` · changes who logs a returned tool
+    ## Approach
+    The desk agent logs each return; a second agent of another lineage checks the log.
+    ## Deliverables
+    - `registry/bodies/d4.desk.yml` holds `capability:loan-handling`
+    ## Definition of Done
+    - ten returns logged and accepted by Ana
+    - Ana observes for a month whether returns are missed
+  comments:
+  - author: ana
+    body: '@D4-TL · L1 · C1 — delivery: taken up: returns. Ten logged, verified by @D4-TL · L2 · C2'
+  anchors:
+  - capability:loan-handling
+  stroke: changes
+  carried_by: body:d4
+  memberships:
+  - kind: model
+    name: Tool library — Model Workshop
+  comments_complete: true
+  writes_model:
+  - registry/bodies/d4.desk.yml
+  delivered_by:
+  - tool-library/tool-library.core@3f2a1c0
+- ref: tool-library/tool-library.core#3
+  type: Task
+  title: Add the return step to the ledger
+  state: closed
+  closed_as: completed
+  status: Done
+  labels:
+  - D4
+  parent: tool-library/tool-library.core#2
+  body: |
+    ## Goal
+    The ledger can record a return.
+    ## Approach
+    One field and one view in the ledger.
+    ## Deliverables
+    - the field `returned_on`
+    ## Definition of Done
+    - a return is recorded in the ledger
+  comments:
+  - author: ana
+    body: '@D4-TL · L1 · C1 — delivery: taken up: done in commit 3f2a1c0'
+  - author: ana
+    body: '@ana — decision: accepted by @ana, under the D4 mandate of the tool library'
+  carried_by: body:d4
+  memberships:
+  - kind: model
+    name: Tool library — Model Workshop
+  comments_complete: true
+  delivered_by:
+  - tool-library/tool-library.core@3f2a1c0
+- ref: tool-library/tool-library.core#4
+  type: Bug
+  title: A return on a Sunday is dated Monday
+  state: open
+  status: Backlog
+  labels:
+  - D4
+  parent: tool-library/tool-library.core#1
+  body: |
+    ## Goal
+    Anchor: `capability:loan-handling` · fulfils the decided rule that a return is dated the day it happens
+    ## Approach
+    Use the day of return, not the next opening day.
+    ## Deliverables
+    - the ledger dates returns correctly
+    ## Definition of Done
+    - a Sunday return carries Sunday's date
+  anchors:
+  - capability:loan-handling
+  stroke: fulfils
+  carried_by: body:d4
+  memberships:
+  - kind: model
+    name: Tool library — Model Workshop
+  comments_complete: true
+- ref: tool-library/tool-library.core#5
+  type: Decision
+  title: 'Decision: the desk may log returns without Ana present'
+  state: closed
+  closed_as: completed
+  status: Done
+  labels:
+  - D0
+  body: |
+    ## Outcome
+    Accepted.
+    ## Scope
+    Returns only; loans still need Ana.
+    ## Decided
+    By @ana, under the D4 mandate of the tool library, given in the Office session of 26 October.
+    ## Statement
+    The desk logs returns on its own; Ana checks a sample each month.
+  comments:
+  - author: ana
+    body: |
+      @O1-TL · L1 · C1 — decision: Ana's word, 2026-10-26, in the Office session, for tool-library/tool-library.core, Post d4.steward
+      > The desk may log returns without me.
+      Recorded at tool-library/tool-library.core#5, comment 1234567
+  carried_by: body:d0
+  memberships:
+  - kind: model
+    name: Tool library — Model Workshop
+  comments_complete: true
+- ref: tool-library/tool-library.core#6
+  type: Escalation
+  title: 'Loop d4 · E1: overdue tools have no Body'
+  state: open
+  status: Backlog
+  labels:
+  - D4
+  assignees:
+  - ana
+  body: |
+    loop: d4 · id: E1
+    ## Raised by
+    loop d4, run 3
+    ## Asked
+    @ana, Steward
+    ## Question
+    Who carries reminders for overdue tools: the desk, or a reminder Body of its own?
+    ## Definition of Done
+    - a Body carries the reminders, recorded in element 9
+  carried_by: body:d4
+  raised_by: loop:d4
+  memberships:
+  - kind: model
+    name: Tool library — Model Workshop
+  comments_complete: true
+- ref: tool-library/tool-library.core#7
+  type: Loop
+  title: Loop d4 — production and resilience
+  state: open
+  status: In Progress
+  labels:
+  - D4
+  body: |
+    ## Definition
+    `operations/loops/d4.loop.yml`, on branch `loop/d4`
+    ## Node
+    `dimension:d4`
+    ## Carried by
+    `body:d4`
+  carried_by: body:d4
+  memberships:
+  - kind: model
+    name: Tool library — Model Workshop
+  comments_complete: true

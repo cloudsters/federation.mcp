@@ -1,0 +1,29 @@
+sections:
+- id: d0.perception-to-mandate
+  binds:
+    kind: family
+    slug: perception-to-mandate
+  cardinality: one
+  labels:
+    en: Who we are
+  needs:
+  - registry
+  - knowledge
+- id: d4.demand-to-fulfillment
+  binds:
+    kind: family
+    slug: demand-to-fulfillment
+  cardinality: per-selected
+  labels:
+    en: How lending works
+  needs:
+  - registry
+- id: lifecycle.path
+  binds:
+    kind: lifecycle
+    slug: path
+  cardinality: one
+  labels:
+    en: Where we are heading
+  needs:
+  - lifecycle

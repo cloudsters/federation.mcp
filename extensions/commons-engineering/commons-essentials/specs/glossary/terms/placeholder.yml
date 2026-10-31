@@ -1,0 +1,20 @@
+id: placeholder
+term: Placeholder
+layer: how
+kind: concept
+definition: 'A name in square brackets that stands for any one of its kind, [commons] for any commons, [domain] for any
+  domain and [world] for any world, while a name without brackets means exactly that one and a concrete commons or
+  domain appears only expressly as an example.'
+why: 'A rule that holds for any commons is written with brackets, so that it can be read for every commons and
+  is never mistaken for the case it was drawn from: [commons].core, [domain].core, [world].[commons].20.core stand
+  for all; commons.o and commons-library name exactly these; health.core appears only as "e.g. health.core"; the Commons, capital, is what the Federation holds in common.'
+relations:
+  stands_for: [commons, domain-core, world]
+not:
+- '[org]'
+- a concrete name as the rule
+status: accepted
+decided:
+  date: '2026-10-29'
+  by: Holger
+  where: 'commons.o#98, comment 6505618412: Adopted 29 October 2026 (the merge of commons.o#100); first decided 2026-10-28, commons.o#98, comment 6474522432 (the bracket convention; [commons] never [org], 26 October 2026)'

@@ -1,0 +1,19 @@
+kind: post
+slug: d4.reminders
+of: d4
+title: Reminders
+responsibility: reminds members of tools due back
+accountable: body:d4
+held_by:
+- kind: agent
+  id: reminder
+  brief: workshop/bodies/start/reminder.md
+  on_behalf_of: person:P_0001
+  since: '2026-10-26'
+safeguards:
+  evals: workshop/evals/reminder.md
+  kill_switch: the keeper on duty switches it off in the ledger
+  scope: sends reminders about tools due back; nothing else
+  review:
+    by: person:P_0001
+    every: month

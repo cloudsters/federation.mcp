@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://commons.engineering/schemas/learn.schema.json",
+  "title": "Commons LEARN: a curriculum path",
+  "description": "A view definition of core-views (R5) of kind curriculum: one path through the body of knowledge, its sections read in order (learn R2).",
+  "type": "object",
+  "required": ["name", "kind", "audience", "promise", "way_back", "sections", "formats", "languages"],
+  "properties": {
+    "name": {"type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"},
+    "kind": {"const": "curriculum"},
+    "audience": {"type": "string", "minLength": 1},
+    "promise": {"type": "string", "minLength": 1, "description": "what the learner can do after the path"},
+    "way_back": {"type": "string", "minLength": 1, "description": "where a learner's question or a found error goes (learn R6)"},
+    "sections": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}, "description": "blueprint section ids (core-views R1), read in order"},
+    "after": {"type": "array", "items": {"type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"}, "description": "the paths a learner should have read first"},
+    "formats": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+    "languages": {"type": "array", "minItems": 1, "items": {"type": "string", "pattern": "^[a-z]{2}$"}}
+  },
+  "additionalProperties": false
+}

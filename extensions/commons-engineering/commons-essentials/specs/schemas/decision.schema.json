@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://commons.engineering/schemas/decision.schema.json",
+  "title": "decision",
+  "description": "One dated decision by the person who holds the mandate. It is the source of every commitment and every intent; it is never a fact about the world. A decision without what would reopen it is a preference.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "decision", "decided", "by", "binds", "reopens_if", "status"],
+  "properties": {
+    "id": { "type": "string", "pattern": "^DEC-[0-9]{3,}$", "description": "stable; never reused, never renumbered" },
+    "decision": { "type": "string", "description": "what is decided, as one sentence that stands on its own" },
+    "question": { "type": "string", "description": "the question it answers, when the answer alone does not carry it" },
+    "decided": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+    "by": { "type": "string", "description": "the person who holds the mandate" },
+    "executed_by": { "type": "string", "description": "who carries it out, when not the same" },
+    "binds": { "type": "string", "description": "where it binds: the terms, schemas, extensions or commons it governs" },
+    "why": { "type": "string", "description": "the reasoning, in the words of the one who decided where possible" },
+    "reopens_if": { "type": "string", "description": "the condition that reopens it; not a date, not a mood" },
+    "terms": { "type": "array", "items": { "type": "string" }, "description": "glossary term ids it concerns" },
+    "amends": { "type": "array", "items": { "type": "string", "pattern": "^DEC-[0-9]{3,}$" }, "description": "decisions it narrows or extends; they stay in force" },
+    "supersedes": { "type": "array", "items": { "type": "string", "pattern": "^DEC-[0-9]{3,}$" }, "description": "decisions it replaces; they stay on record as superseded" },
+    "where": { "type": "string", "description": "where it was taken: an issue, a conversation, a meeting" },
+    "status": { "enum": ["in-force", "superseded", "reopened"], "description": "a superseded or reopened decision is a new record's doing, never an edit of this one's substance" }
+  },
+  "examples": [
+    {
+      "id": "DEC-001",
+      "decision": "World replaces Game: a world names a full future state and its moves, and never binds a role, a budget or a person.",
+      "decided": "2026-10-16",
+      "by": "Holger Eggerichs",
+      "binds": "the term world, the instance type .w, every commons that models futures",
+      "why": "A pole of the future is a state, not a rule set.",
+      "reopens_if": "a future state appears that cannot be modelled without binding a role, a budget or a person",
+      "terms": ["world"],
+      "where": "cloudsters/cloudsters.o#30",
+      "status": "in-force"
+    }
+  ]
+}

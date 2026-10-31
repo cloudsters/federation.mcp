@@ -1,0 +1,192 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://commons.engineering/schemas/core-views.schema.json",
+  "title": "core-views",
+  "description": "The blueprint definition and the view definitions of a Commons CORE (core-views.md). The root is one of two files: views/blueprint.yml (sections) or a views/<name>/view.yml (a flat view). A view is generated from records; it is never a source of fact.",
+  "type": "object",
+  "$defs": {
+    "section": {
+      "type": "object",
+      "required": [
+        "id",
+        "binds",
+        "cardinality",
+        "labels"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9-]+(\\.[a-z0-9-]+)*$",
+          "description": "stable, namespaced by the frame node it binds to; never a section number"
+        },
+        "binds": {
+          "type": "object",
+          "required": [
+            "kind",
+            "slug"
+          ],
+          "properties": {
+            "kind": {
+              "enum": [
+                "dimension",
+                "family",
+                "element",
+                "knowledge",
+                "lifecycle",
+                "operations"
+              ]
+            },
+            "slug": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "cardinality": {
+          "enum": [
+            "one",
+            "per-selected"
+          ],
+          "description": "per-selected: one per element the commons has selected"
+        },
+        "labels": {
+          "type": "object",
+          "minProperties": 1,
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "per language"
+        },
+        "questions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "needs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "structure keys it reads"
+        }
+      }
+    },
+    "outcome": {
+      "enum": [
+        "covered",
+        "not-selected",
+        "missing",
+        "documented-absence",
+        "unsighted"
+      ]
+    },
+    "view": {
+      "type": "object",
+      "required": [
+        "name",
+        "kind",
+        "audience",
+        "sections",
+        "formats",
+        "languages"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "pattern": "^[a-z0-9-]+$"
+        },
+        "kind": {
+          "enum": [
+            "briefing",
+            "lighthouse",
+            "spoken",
+            "portal",
+            "card",
+            "gaps",
+            "curriculum"
+          ]
+        },
+        "variant": {
+          "type": "string",
+          "description": "for a briefing: full, summary, environment, futures"
+        },
+        "audience": {
+          "type": "string",
+          "minLength": 1
+        },
+        "promise": {
+          "type": "string",
+          "description": "what the view promises its reader"
+        },
+        "way_back": {
+          "type": "string",
+          "description": "where a reader's correction goes"
+        },
+        "sections": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          },
+          "description": "section ids, in order"
+        },
+        "after": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z0-9-]+$"
+          },
+          "description": "for a curriculum: the paths it presupposes, by view name (learn R2)"
+        },
+        "formats": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "enum": [
+              "markdown",
+              "pdf",
+              "portal"
+            ]
+          }
+        },
+        "languages": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z]{2}$"
+          }
+        },
+        "host": {
+          "type": "string",
+          "description": "where the rendering is delivered, provider-neutral"
+        },
+        "visibility": {
+          "type": "string",
+          "description": "the outermost shell that may see it"
+        }
+      }
+    }
+  },
+  "oneOf": [
+    {
+      "type": "object",
+      "required": [
+        "sections"
+      ],
+      "properties": {
+        "sections": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/section"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    {
+      "$ref": "#/$defs/view"
+    }
+  ]
+}

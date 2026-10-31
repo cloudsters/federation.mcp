@@ -1,0 +1,17 @@
+id: branch
+term: Branch
+layer: workshop
+kind: concept
+definition: 'A line of work beside main that proposes one change and becomes part of main only by a merge, which the
+  inner shell of the repository''s pair makes, or a shell inside it, and in the CORE''s repository only SEED.'
+why: 'What main holds is what the commons has shaped and decided; a branch is a proposal until then. How branches are
+  named and how they reach main through a pull request is FLOW''s.'
+relations:
+  merged_through: pull-request
+not:
+- main
+status: accepted
+decided:
+  date: '2026-10-29'
+  by: Holger
+  where: 'commons.o#98, comment 6505618412: Adopted 29 October 2026 (the merge of commons.o#100)'

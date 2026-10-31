@@ -1,0 +1,11 @@
+id: value-stream-family
+term: Value-stream family
+layer: how
+kind: family
+definition: One of thirteen patterns of value creation, the same in every domain.
+why: Identical families make domains comparable.
+relations:
+  part_of: dimension
+not:
+- VSF
+status: draft

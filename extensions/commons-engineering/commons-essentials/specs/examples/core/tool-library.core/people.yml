@@ -1,0 +1,8 @@
+people:
+- id: P_0001
+  name: A. Keeper
+  role: post:d0.steward
+  contact: the lending desk
+- id: P_0002
+  name: B. Keeper
+  role: post:d4.desk

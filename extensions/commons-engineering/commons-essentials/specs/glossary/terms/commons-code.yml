@@ -1,0 +1,14 @@
+id: commons-code
+term: Commons code
+layer: what
+kind: concept
+definition: The two-letter code by which a commons is known among the commons it works with, recorded once in its own identity file and used to form its Bodies' handles.
+why: A handle such as @D1-CE must say which commons a Body belongs to without a list kept anywhere else. Two letters are unique among the commons that work together, not worldwide; a clash is settled between the two commons. A commons code is not a country code, although some coincide with ISO 3166 codes.
+relations:
+  identifies: commons
+  forms_handle_of: body
+status: accepted
+decided:
+  date: '2026-10-24'
+  by: Holger
+  where: cloudsters/cloudsters.o#57 (handle rule, points 1–2); word by D0 of the federation

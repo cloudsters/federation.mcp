@@ -1,0 +1,13 @@
+id: project-workshop
+term: Project Workshop
+layer: workshop
+kind: concept
+definition: A workshop a commons sets up for a purpose of its own, with the same types, status and rules as its Model and Commons Workshops, so that work can move between them.
+why: Work beside the two archetypes needs a place without a second set of rules; a Story that changes the model stays an item of the Model Workshop, where its gate is.
+relations:
+  part_of: commons-core
+status: accepted
+decided:
+  date: '2026-10-24'
+  by: Holger
+  where: commons.o#84 (Project Workshops alongside)

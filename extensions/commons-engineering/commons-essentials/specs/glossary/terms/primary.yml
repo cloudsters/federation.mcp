@@ -1,0 +1,8 @@
+id: primary
+term: Primary
+layer: what
+kind: concept
+definition: The one extension a commons speaks in; a commons has exactly one.
+relations:
+  contrasts: secondary
+status: draft

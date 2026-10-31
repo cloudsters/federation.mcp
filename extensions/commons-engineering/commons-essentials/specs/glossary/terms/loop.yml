@@ -1,0 +1,11 @@
+id: loop
+term: Loop
+layer: how
+kind: concept
+definition: 'A standing contract that keeps one element of the model true: trigger, context, state, isolation, feedback
+  and stop, with what it measures and emits.'
+why: It runs on a rhythm and closes only when it is retired.
+relations:
+  keeps_true: graph
+  raises: delta
+status: draft

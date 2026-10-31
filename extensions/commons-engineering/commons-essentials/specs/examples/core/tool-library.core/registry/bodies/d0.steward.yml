@@ -1,0 +1,10 @@
+kind: post
+slug: d0.steward
+of: d0
+title: Steward
+responsibility: keeps the whole in view and answers for what the mandates reserve to the steward
+accountable: person:P_0001
+held_by:
+- kind: human
+  id: person:P_0001
+  since: '2026-10-26'

@@ -1,0 +1,20 @@
+# generated from the release event of its source (library R3); never edited by hand
+kind: extension
+profile: specifications
+extension: commons-essentials
+library: commons-engineering
+version: 0.2.0
+made_in: Commons-Engineering/commons.o@905dc87470699d3b071c77bddcb8640c6e89cbfb
+event: Commons-Engineering/commons.o@905dc87470699d3b071c77bddcb8640c6e89cbfb:lifecycle/events/2026-10-31-release-commons-essentials-0.2.0.yml
+gate:
+  result: pass
+  check: Commons-Engineering/commons.o@905dc87:specs/tools/check_library.py
+changed:
+- essentials
+parts:
+  essentials:
+    class: public
+    digest: sha256:d49176526000da3c94674b597adf28a56c43788d40456bd0da87973ff2f10ce7
+licence: LicenseRef-commons-engineering
+answers: Commons-Engineering/commons.o
+renames: {}

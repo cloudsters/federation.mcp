@@ -1,0 +1,27 @@
+id: configuration
+term: Configuration
+layer: what
+kind: concept
+definition: 'The selection a commons makes from an offer, the maximal bill of all its options: it installs an
+  extension whole, adopts or does not select each archetype and marks a changed adoption as adapted, and a change to
+  it takes effect only by decision, at a stated revision.'
+why: 'One word for what a commons takes from an offer and how, so that install, adopt, not selected and adapted are
+  steps of one act; the offer is the maximal bill and the configuration the commons'' own. In German, Konfiguration.'
+relations:
+  selects_from: extension
+  gathers:
+  - install
+  - adopt
+  - not-selected
+  sets: usage
+not:
+- the settings of a CORE
+- an offer
+- 'a baseline, since every revision of main is an approved configuration'
+- 'a profile, which is a release''s (LIBRARY); a target environment such as boot, local or federated is no profile,
+  and a commons'' mode of access is its shells'
+status: accepted
+decided:
+  date: '2026-10-30'
+  by: Holger
+  where: 'commons.o#107, comment 6519835234: Adopted 30 October 2026 (step 1 of the bill of materials)'

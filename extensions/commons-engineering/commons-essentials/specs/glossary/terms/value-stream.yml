@@ -1,0 +1,10 @@
+id: value-stream
+term: Value Stream
+layer: how
+kind: element
+definition: 'Element 5: the value exchange seen from within, as an ordered sequence of steps.'
+relations:
+  part_of: scaffold
+  fulfils: value-exchange
+  has: value-stream-step
+status: draft

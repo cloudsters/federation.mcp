@@ -1,0 +1,11 @@
+name: card
+kind: card
+audience: anyone who meets the library
+promise: what the library is and how to reach it
+way_back: a proposal item in the Commons Workshop
+sections:
+- d0.perception-to-mandate
+formats:
+- markdown
+languages:
+- en

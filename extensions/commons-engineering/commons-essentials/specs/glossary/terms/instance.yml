@@ -1,0 +1,13 @@
+id: instance
+term: Instance
+layer: what
+kind: repository
+definition: 'The repository that holds a Commons CORE: .d observed profile, .o operations, .w world, .i an incubator''s
+  open book.'
+not:
+- .g
+status: accepted
+decided:
+  date: '2026-10-29'
+  by: Holger
+  where: 'commons.o#98, comment 6505618412: Adopted 29 October 2026 (the merge of commons.o#100)'
