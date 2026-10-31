@@ -1,0 +1,12 @@
+id: commons
+term: Commons
+layer: why
+kind: concept
+definition: 'A shared value creation of any form — a life, an organisation, a settlement, a city, an ecosystem.'
+why: It is developed toward the five qualities and tested against them; every other term serves it.
+relations:
+  tested_by: five-qualities
+  modelled_as: commons-core
+not:
+- house
+status: draft

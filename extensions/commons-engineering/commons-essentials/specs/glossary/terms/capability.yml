@@ -1,0 +1,9 @@
+id: capability
+term: Capability
+layer: how
+kind: element
+definition: 'Element 6: what a step requires — one map from L0 to L5.'
+relations:
+  part_of: scaffold
+  bound_to: value-stream-step
+status: draft

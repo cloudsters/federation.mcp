@@ -1,0 +1,13 @@
+id: scaffold
+term: Scaffold
+layer: how
+kind: concept
+definition: 'The nine elements of a model: Stakeholder, Journey, Touchpoint, Value Exchange, Value Stream, Capability, Entity, Solution, Body.'
+why: The elements are named by what they hold; position is left to its HR meaning, which a Post maps to.
+not:
+- positions (of the scaffold)
+status: accepted
+decided:
+  date: '2026-10-18'
+  by: Holger
+  where: workshop/_drafts/DECISION_POSITIONS_JOBS_ROLES.md §11 (V1)

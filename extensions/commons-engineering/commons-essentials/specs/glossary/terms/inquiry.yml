@@ -1,0 +1,12 @@
+id: inquiry
+term: Inquiry
+layer: workshop
+kind: work-item
+definition: Work on an organisation's possible Commons CORE from public data; it lives in issues, never in the model.
+not:
+- lead
+status: accepted
+decided:
+  date: '2026-10-29'
+  by: Holger
+  where: 'commons.o#98, comment 6505618412: Adopted 29 October 2026 (the merge of commons.o#100); first decided 2026-10-16, target_architecture §11'

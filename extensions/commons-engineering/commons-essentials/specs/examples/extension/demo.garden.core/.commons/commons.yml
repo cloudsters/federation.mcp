@@ -1,0 +1,13 @@
+id: garden
+name: Community garden research
+code: CG
+holder: demo
+instance_type: commons
+language: en
+structure: 0.3.0
+extensions:
+- id: commons-essentials
+  version: 0.1.0
+- id: commons-library/extension-builders
+  version: 0.1.0
+  primary: true

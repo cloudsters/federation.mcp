@@ -1,0 +1,19 @@
+id: part
+term: Part
+layer: what
+kind: concept
+definition: 'Anything with an identity and a version that a bill of materials names as parent or child: a commons, a
+  component, a release and each of its parts as LIBRARY records them, a specification or a source read.'
+why: 'LIBRARY''s parts of a release, the essentials or patterns that are copied and the enhanced part that is served,
+  each with its visibility class and digest, are parts in this sense, so the discipline needs no second word. A part
+  where it is copied is held to its digest. Configuration management calls it a configuration item. In German, Teil.'
+relations:
+  held_in: bill-of-materials
+not:
+- a line of a bill
+- a quantity
+status: accepted
+decided:
+  date: '2026-10-30'
+  by: Holger
+  where: 'commons.o#107, comment 6519835234: Adopted 30 October 2026 (step 1 of the bill of materials)'

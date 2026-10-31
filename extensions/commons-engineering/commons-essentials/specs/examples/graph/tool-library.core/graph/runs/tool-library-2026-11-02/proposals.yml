@@ -1,0 +1,16 @@
+# what this run suggests for a source's curated relationships; a person takes it in or declines it (graph-engine R10)
+proposals:
+- source: own-patterns
+  node: tool-library/tl_0001
+  field: relationships.complementary
+  target: commons-library/pat_reci0001
+  edge: edges.jsonl:2
+  state: open
+  class: member
+- source: own-patterns
+  node: tool-library/tl_0001
+  field: relationships.complementary
+  target: commons-library/pat_tool0001
+  edge: edges.jsonl:3
+  state: open
+  class: member

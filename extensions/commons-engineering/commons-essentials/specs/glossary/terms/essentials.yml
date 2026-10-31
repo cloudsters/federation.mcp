@@ -1,0 +1,14 @@
+id: essentials
+term: Essentials
+layer: what
+kind: artefact
+definition: The installable, public part of an extension, which a commons installs whole and read-only.
+why: Installing it whole does not mean adopting it whole; a commons adopts its archetypes selectively (adopt, not-selected). A part of one extension, never an extension of its own.
+relations:
+  part_of: extension
+  paired_with: enhanced
+status: accepted
+decided:
+  date: '2026-10-28'
+  by: Holger
+  where: commons.o#90, comment 6464676842

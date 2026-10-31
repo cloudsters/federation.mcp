@@ -1,0 +1,13 @@
+id: sponsor
+term: Sponsor
+layer: what
+kind: concept
+definition: An organisation that stands behind the lighthouse we publish about it and proposes corrections; a relation,
+  never a transfer of ownership.
+relations:
+  of: lighthouse
+status: accepted
+decided:
+  date: '2026-10-16'
+  by: Holger
+  where: target_architecture §11

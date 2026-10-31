@@ -1,0 +1,6 @@
+sources:
+- id: S1
+  designation: SAMPLE-GG
+  edition: '2024'
+  jurisdiction: global
+  relation: derived-from

@@ -1,0 +1,9 @@
+id: stakeholder
+term: Stakeholder
+layer: how
+kind: element
+definition: 'Element 1: those the system serves and those who serve it — persons, groups, organisations, agents,
+  more-than-human participants.'
+relations:
+  part_of: scaffold
+status: draft

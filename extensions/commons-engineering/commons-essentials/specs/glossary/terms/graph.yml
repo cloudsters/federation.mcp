@@ -1,0 +1,20 @@
+id: graph
+term: Graph
+layer: how
+kind: concept
+definition: 'The connections across everything a commons'' sources hold: stated edges read from the sources at the
+  revision asked about, and computed edges only from released runs, never written back into a source.'
+why: 'One graph per commons, the same at every level. A computed edge is a candidate with a known origin, never a
+  fact or a confidence. A delta between two revisions shows how the model changed, not how reality drifted, and
+  is computed, never kept by hand.'
+relations:
+  expressed_by: loop
+  held_in: commons-graph
+not:
+- a copy of the sources
+- a priority
+status: accepted
+decided:
+  date: '2026-10-28'
+  by: Holger
+  where: commons.o#93, comment 6468689596 (GRAPH adopted; first named 16 October 2026)

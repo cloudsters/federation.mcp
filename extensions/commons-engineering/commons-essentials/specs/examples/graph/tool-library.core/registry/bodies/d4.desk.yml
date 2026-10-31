@@ -1,0 +1,13 @@
+kind: post
+slug: d4.desk
+of: d4
+title: Desk
+responsibility: runs the lending desk on opening days
+accountable: person:P_0001
+held_by:
+- kind: human
+  id: person:P_0001
+  since: '2026-10-26'
+- kind: human
+  id: person:P_0002
+  since: '2026-10-26'

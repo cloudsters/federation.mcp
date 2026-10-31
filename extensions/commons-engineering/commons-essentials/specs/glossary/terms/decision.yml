@@ -1,0 +1,10 @@
+id: decision
+term: Decision
+layer: workshop
+kind: work-item
+definition: A choice that needs an owner and a date; done when it is recorded, not when it is implemented.
+status: accepted
+decided:
+  date: '2026-10-16'
+  by: Holger
+  where: issue types of cloudsters and Commons-Engineering

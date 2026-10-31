@@ -1,0 +1,10 @@
+id: extension
+term: Extension
+layer: what
+kind: artefact
+definition: The released, gated offer of one [domain].core, on one version line, held in a library and installed from it; its essentials are installed and its enhanced part is served.
+status: accepted
+decided:
+  date: '2026-10-28'
+  by: Holger
+  where: commons.o#90, comments 6464648757 and 6464676842

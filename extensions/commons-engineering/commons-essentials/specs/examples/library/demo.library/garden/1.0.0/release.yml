@@ -1,0 +1,27 @@
+kind: extension
+profile: offer
+extension: garden
+library: demo-library
+version: 1.0.0
+made_in: demo/garden.core@2a3b4c5d6e7f8091a2b3c4d5e6f708192a3b4c5d
+event: demo/garden.core@2a3b4c5d6e7f8091a2b3c4d5e6f708192a3b4c5d:lifecycle/events/2026-10-28-release-1.0.0.yml
+gate:
+  result: pass
+  check: Commons-Engineering/commons.o@53834fc:specs/tools/check_library.py
+changed:
+- essentials
+- enhanced
+parts:
+  essentials:
+    class: public
+    digest: sha256:a7bb61adebd6e5ade945933fcd4484c539b04860d9f4bd8f14886086297fbd3a
+  enhanced:
+    class: member
+    digest: sha256:7e773a399238c819594c86bf22ba251f8da46093550d9bb1aef7099e2705e4da
+licence: CC-BY-SA-4.0
+answers: demo/garden.core
+renames:
+  stakeholder:gardener: stakeholder:grower
+retires:
+- id: garden@0.1.0
+  from: '2026-10-28'

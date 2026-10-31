@@ -1,0 +1,8 @@
+id: pattern
+term: Pattern
+layer: how
+kind: concept
+definition: A recurring, named solution to a tension, with its context, consequences and vitality.
+relations:
+  stands_in: orbit
+status: draft

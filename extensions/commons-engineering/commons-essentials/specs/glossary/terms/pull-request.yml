@@ -1,0 +1,19 @@
+id: pull-request
+term: Pull request
+layer: workshop
+kind: concept
+definition: 'The request to merge one branch into main, which names its item, carries the checks of the change and is
+  merged by the inner shell of the repository''s pair, or a shell inside it, in the CORE''s repository only by SEED; on
+  other platforms it is called a merge request.'
+why: 'The pull request carries the change and its checks, the item stays the record of the decision, and the branch is
+  deleted after the merge.'
+relations:
+  merges: branch
+not:
+- the record of the decision
+- merge request (as a term of its own)
+status: accepted
+decided:
+  date: '2026-10-29'
+  by: Holger
+  where: 'commons.o#98, comment 6505618412: Adopted 29 October 2026 (the merge of commons.o#100)'

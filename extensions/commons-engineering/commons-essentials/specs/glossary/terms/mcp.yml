@@ -1,0 +1,12 @@
+id: mcp
+term: Commons MCP
+layer: what
+kind: concept
+definition: The service through which the Commons GRAPH is reached, serving each asker what its visibility allows.
+relations:
+  is_a: component
+status: accepted
+decided:
+  date: '2026-10-29'
+  by: Holger
+  where: 'commons.o#98, comment 6505618412: Adopted 29 October 2026 (the merge of commons.o#100)'

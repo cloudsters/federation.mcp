@@ -1,0 +1,200 @@
+# structure.yml — the structure of a Commons CORE, as data
+#
+# Version 0.3.0, released with Commons Essentials. It holds S4 and S7 from 0.2.0, S2.1 (no
+# `instance/`), S2.2 amended (`views/<name>/` with `kind`), S2.3 (no empty placeholders) and S2.4
+# (content kept in full), decided by Holger on 22 October 2026 (Commons-Engineering/commons.o#74),
+# and S6 (`knowledge/`, 25 October 2026). The settings under `.commons/` are those of `core` part 5
+# and `mcp` part 5. Every moved area and path keeps its earlier location, so a reader finds a
+# commons on either layout, and the migration map stays derived.
+#
+# Element folders in use, by generation:
+#   five-folder     the chain-era layout
+#   unnumbered      stakeholders, solutions, seats — built by some commons before the numbering
+#   nine-positions  1_stakeholders … 9_seats — the hull's layout from 15 October 2026
+#   plain-keys      stakeholders … bodies — `folder` below (S4)
+#
+# A reader tries `folder` first, then each `earlier` name in the order listed. A commons found
+# on an earlier name is unmigrated, never refused. A folder name of no generation is unknown.
+# Every path is POSIX, relative to the commons root. A CORE reads its installed copy,
+# `specs/structure.yml`.
+
+schema: 1
+version: 0.3.0
+status: current
+id: commons-core-structure
+describes: S2, S4, S6, S7
+
+generations:
+  five-folder:    {state: retired}
+  unnumbered:     {state: retired, note: "folders for positions 1, 8 and 9 that some commons built before the nine positions were numbered; stakeholders and solutions coincide with the plain keys"}
+  nine-positions: {state: retired, from: "S4"}
+  plain-keys:     {state: current, decision: "S4.1, commons.o#74 — decided by Holger, 22 October 2026"}
+
+# Top-level areas of a CORE, at the root (S2.1). `earlier` is where an area sat before; a commons
+# found there is unmigrated, never refused. A structure key may point to another location
+# (topology tiers, commons.o#74): a commons declares only the keys it moves.
+areas:
+  registry:   {path: registry,   earlier: [instance/registry]}
+  operations: {path: operations, earlier: [instance/operations]}
+  workshop:   {path: workshop,   earlier: [instance/workshop]}
+  views:      {path: views,      earlier: [instance/portals]}      # S2.2 amended: views/<name>/, kind per view
+  lifecycle:  {path: lifecycle}                                     # S7
+  knowledge:  {path: knowledge,  earlier: [instance/workshop/evidence, workshop/evidence]}   # S6 (Holger, 25 October 2026)
+  specs:      {path: specs}                                         # the commons' specifications, own and installed (Holger, 26 October 2026, commons.o#89)
+  extensions: {path: extensions}                                    # installed extensions, read-only, resolved in the lock (Holger, 26 October 2026, commons.o#90)
+
+# Areas that no longer exist (S2.3, S2.4). Nothing reads them; the migration removes them when empty
+# and reports any content it finds there instead of moving it silently.
+retired_areas:
+  - instance/manifests
+  - instance/specs
+  - instance/patterns
+  - instance/templates
+  - instance/scripts
+
+# The nine elements of the scaffold, in order. `key` is the glossary id (commons-as-code); `folder`
+# is the plain key. The order lives here and nowhere in a path.
+elements:
+  - key: stakeholder
+    position: 1
+    label: Stakeholder
+    folder: stakeholders
+    earlier:
+      - {folder: 1_stakeholders, generation: nine-positions}
+  - key: journey
+    position: 2
+    label: Journey
+    folder: journeys
+    earlier:
+      - {folder: 2_journeys, generation: nine-positions}
+      - {folder: 1_journeys, generation: five-folder}
+  - key: touchpoint
+    position: 3
+    label: Touchpoint
+    folder: touchpoints
+    earlier:
+      - {folder: 3_touchpoints, generation: nine-positions}
+      - {folder: 2_touchpoints, generation: five-folder}
+  - key: value-exchange
+    position: 4
+    label: Value Exchange
+    folder: value-exchanges
+    earlier:
+      - {folder: 4_value-exchanges, generation: nine-positions}
+      - {folder: value-propositions, generation: five-folder, reads_as: "the offered half of an exchange; each gap is named by what the record lacks: return, stakeholder, touchpoint"}
+  - key: value-stream
+    position: 5
+    label: Value Stream
+    folder: value-streams
+    earlier:
+      - {folder: 5_value-streams, generation: nine-positions}
+      - {folder: 3_valuestreams, generation: five-folder}
+  - key: capability
+    position: 6
+    label: Capability
+    folder: capabilities
+    earlier:
+      - {folder: 6_capabilities, generation: nine-positions}
+      - {folder: 4_capabilities, generation: five-folder, by_dimension: true}
+  - key: entity
+    position: 7
+    label: Entity
+    folder: entities
+    earlier:
+      - {folder: 7_entities, generation: nine-positions}
+      - {folder: 5_entities, generation: five-folder, by_dimension: true}
+  - key: solution
+    position: 8
+    label: Solution
+    folder: solutions
+    earlier:
+      - {folder: 8_solutions, generation: nine-positions}
+      - {folder: providers, generation: five-folder, reads_as: "systems that carry capabilities (records of type provider)"}
+  - key: body
+    position: 9
+    label: Body
+    folder: bodies
+    earlier:
+      - {folder: 9_seats, generation: nine-positions}
+      - {folder: seats, generation: unnumbered}
+
+# Five-folder subfolders where an earlier element folder is split by dimension (`by_dimension`).
+# They dissolve: records move flat into the element's folder. A record's position across D0–D4 is
+# derived from the steps that bind it; the subfolder is kept in the migration record, not in a path.
+dimension_folders:
+  D0: perception
+  D1: purpose
+  D2: participation
+  D3: proposition
+  D4: production
+
+# Earlier folders with no element of their own: none since 0.2.0 (providers → solutions).
+unmapped: []
+
+# Files and folders that tools read or write, by name. `earlier` as for areas; `open` names the
+# decision a path still waits for.
+paths:
+  stage:              {path: lifecycle/stage.yml}                  # S7; `stage` leaves identity.yml with S1
+  events:             {path: lifecycle/events}                     # S7
+  blueprint:          {path: null, earlier: [blueprint.md]}        # the full briefing is rendered as briefing.md (core-views R7)
+  lighthouse:         {path: null, earlier: [lighthouse.md]}       # a view of kind `lighthouse` in views/ (core-views R5, R6)
+  people:             {path: people.yml, earlier: [instance/people.yml]}   # the party register (S2.4, S3.2; Holger, 26 October 2026, commons.o#89)
+  records:            {path: null, earlier: [instance/records]}    # evidence lives in knowledge/ (S6)
+  lighthouses:        {path: null, earlier: [instance/lighthouses]}   # views/<name>/ (core-views R5)
+  account:            {path: workshop/account, earlier: [instance/account]}   # S2.4
+  loops:              {path: operations/loops, earlier: [instance/operations/loops]}
+  loop_contract:      {path: operations/loops/_contract.yml}       # a commons' pin and adaptations only (F16)
+  loop_state:         {path: operations/loops/_state, earlier: [instance/operations/loops/_state]}
+  rhythms:            {path: operations/rhythms.md, earlier: [instance/operations/rhythms.md]}
+  evidence:           {path: knowledge, earlier: [workshop/evidence, instance/workshop/evidence]}   # S6 (Holger, 25 October 2026); core-knowledge
+  claims:             {path: knowledge/claims.yml, earlier: [workshop/evidence/claims.yml, instance/workshop/evidence/claims.yml]}   # S6 (Holger, 25 October 2026); core-knowledge
+  evidence_stakeholders: {path: knowledge/stakeholders.yml, earlier: [workshop/evidence/stakeholders.yml, instance/workshop/evidence/stakeholders.yml]}   # S6 (Holger, 25 October 2026); core-knowledge
+  gate1:              {path: workshop/GATE1.md, earlier: [instance/workshop/GATE1.md]}
+  deliverables:       {path: workshop/_deliverables, earlier: [instance/workshop/_deliverables]}
+  analysis:           {path: workshop/analysis, earlier: [instance/workshop/analysis]}
+  pitch:              {path: workshop/pitch.md, earlier: [instance/workshop/pitch.md]}
+  management_summary: {path: workshop/management-summary.md, earlier: [instance/workshop/management-summary.md]}
+  flowback:           {path: workshop/FLOWBACK.md, earlier: [instance/workshop/FLOWBACK.md]}
+  migration:          {path: workshop/_migration, earlier: [instance/workshop/_migration]}
+  build:              {path: .build}
+  industry_analysis:  {path: workshop/analysis/industry-analysis.md, earlier: [instance/workshop/analysis/industry-analysis.md]}
+  scenarios:          {path: workshop/analysis/scenarios-2050.md, earlier: [instance/workshop/analysis/scenarios-2050.md]}
+  sources:            {path: knowledge/sources.yml, earlier: [workshop/evidence/sources.yml, instance/workshop/evidence/sources.yml]}   # S6 (Holger, 25 October 2026); core-knowledge
+  entities:           {path: knowledge/entities.yml, earlier: [workshop/evidence/entities.yml, instance/workshop/evidence/entities.yml]}   # S6 (Holger, 25 October 2026); core-knowledge
+  gaps:               {path: knowledge/gaps.md, earlier: [workshop/evidence/gaps.md, instance/workshop/evidence/gaps.md]}   # S6 (Holger, 25 October 2026); core-knowledge
+  triangulation:      {path: knowledge/triangulation.md, earlier: [workshop/evidence/triangulation.md, instance/workshop/evidence/triangulation.md]}   # S6 (Holger, 25 October 2026); core-knowledge
+  evidence_readme:    {path: knowledge/README.md, earlier: [workshop/evidence/README.md, instance/workshop/evidence/README.md]}   # S6 (Holger, 25 October 2026); core-knowledge
+  digest:             {path: knowledge/digest.md, earlier: [workshop/evidence/digest.md, instance/workshop/evidence/digest.md]}   # S6 (Holger, 25 October 2026); core-knowledge
+  evidence_notes:     {path: knowledge/notes, earlier: [workshop/evidence/knowledge, instance/workshop/evidence/knowledge]}   # S6 (Holger, 25 October 2026); core-knowledge
+
+# Paths that no longer exist (S2.4): nothing reads them.
+retired_paths:
+  - instance/program.md        # dropped with the heartbeat
+  - commons/scripts            # the chain-era hull scripts
+  - .commons/scripts           # the hull scripts of Commons Core 0.3; the tools are installed in specs/tools/
+
+# The files under .commons/ (core part 5, mcp part 5). `earlier` are the files of Commons Core 0.3
+# and before: a commons that still holds them is unmigrated, and nothing else reads them.
+commons_files:
+  commons:    .commons/commons.yml
+  access:     .commons/access.yml
+  lock:       .commons/lock.yml
+  federation: .commons/federation.yml
+  earlier:    [.commons/identity.yml, .commons/config.yml, .commons/a2a.yml, .commons/account.yml, .commons/deliverables.yml, .commons/library.yml, .commons/library.lock, .commons/intake.yml, .commons/archetype-reasoning.md]
+
+# What the template of a CORE holds, in this order. `elements` expands to the
+# registry folder of every element, in position order.
+hull:
+  dirs:
+    - {elements: registry}
+    - operations
+    - operations/loops
+    - operations/loops/_state
+    - workshop
+    - lifecycle
+    - lifecycle/events
+    - .commons
+  # `views/` and every other optional folder are created when first needed (S2.3).
+  # A commons with content in an earlier area is unmigrated: the hull creates none of the moved
+  # areas beside it, so no second layout grows next to a filled one (the rule 0.1.0 applies to
+  # the registry, extended to every area).

@@ -1,0 +1,19 @@
+id: shell
+term: Shell
+layer: how
+kind: concept
+definition: 'A group of users who stand at the same closeness to a commons'' model, from SEED at the centre to ROAM
+  outside; a commons adapts its own shells, and access follows the shell.'
+why: 'A shell carries access, never mandate: governing is a mandate in a Body. Every user belongs to one shell of a
+  commons, humans working with agents; at ROAM a caller need not be a user.'
+relations:
+  part_of: commons
+  groups: user
+not:
+- ring
+- orbit_level
+status: accepted
+decided:
+  date: '2026-10-29'
+  by: Holger
+  where: 'commons.o#98, comment 6505618412: Adopted 29 October 2026 (the merge of commons.o#100); first decided 2026-10-24, commons.o#80, S1–S7'

@@ -1,0 +1,10 @@
+id: task
+term: Task
+layer: workshop
+kind: work-item
+definition: A concrete step inside a story, with no outcome of its own.
+status: accepted
+decided:
+  date: '2026-10-16'
+  by: Holger
+  where: issue types of cloudsters and Commons-Engineering

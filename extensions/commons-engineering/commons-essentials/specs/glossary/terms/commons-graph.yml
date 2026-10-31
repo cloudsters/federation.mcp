@@ -1,0 +1,22 @@
+id: commons-graph
+term: Commons GRAPH
+layer: what
+kind: repository
+definition: 'A commons'' graph as a component, [commons] GRAPH: its source register and run packages in the area
+  graph/ of its CORE, or in a repository [commons].graph of its own once it outgrows the CORE.'
+why: 'It sits beside knowledge/ and is none of the other areas: a computed association is not evidence, and the
+  registry holds the near future, not candidates. Moving from an area to a repository changes a location, never a
+  record. Commons Engineering''s graph is one such graph; a graph across commons holds only aggregates of members
+  who opted in.'
+relations:
+  is_a: component
+  part_of: commons-core
+  holds: graph
+not:
+- the whole of what Commons Engineering knows
+- a directory over all sources
+status: accepted
+decided:
+  date: '2026-10-29'
+  by: Holger
+  where: 'commons.o#98, comment 6505618412: Adopted 29 October 2026 (the merge of commons.o#100); first decided 2026-10-28, commons.o#93, comment 6468689596 (GRAPH adopted; first named 16 October 2026)'

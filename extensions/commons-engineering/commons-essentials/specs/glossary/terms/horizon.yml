@@ -1,0 +1,17 @@
+id: horizon
+term: Horizon
+layer: how
+kind: concept
+definition: 'The distance in years ahead at which a commons'' model is looked at: 0 for the near future, then for
+  example 10 or 20.'
+why: A horizon is a distance, never a date; the target year is a record (as_of plus horizon) and never part of a name.
+relations:
+  of: time-slice
+not:
+- date
+- target year
+status: accepted
+decided:
+  date: '2026-10-26'
+  by: Holger
+  where: commons.o#85 (rolling slices, 25 October; the marker, comment 6415790681)

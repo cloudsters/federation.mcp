@@ -1,0 +1,21 @@
+id: resolution
+term: Resolution
+layer: what
+kind: concept
+definition: 'The multi-level bill of a part, computed by Commons GRAPH from the single-level bills of the part and of
+  every part beneath it, at stated revisions, and never stored.'
+why: 'Each commons keeps only its single-level bill, so what it is made of on every level, its components, the
+  releases they take in and the federation around it, is one answer computed on demand. In German, Auflösung.'
+relations:
+  of: bill-of-materials
+  computed_by: commons-graph
+  inverse: where-used
+not:
+- a stored multi-level bill
+- 'dependency resolution; a commons never resolves a version range, it pins and takes up a newer release by
+  decision'
+status: accepted
+decided:
+  date: '2026-10-30'
+  by: Holger
+  where: 'commons.o#107, comment 6519835234: Adopted 30 October 2026 (step 1 of the bill of materials)'

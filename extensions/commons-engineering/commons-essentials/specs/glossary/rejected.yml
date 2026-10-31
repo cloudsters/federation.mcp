@@ -1,0 +1,25 @@
+# Terms no longer used anywhere in Commons Engineering. The checker flags them in new text.
+# Each names what replaces it. Federation-specific retirements (BANK, Agio, …) live in cloudsters.o.
+rejected:
+  - { term: reading (for an expected statement), use: expectation, since: 2026-10-28 }
+  - { term: observation (as the id of a Fabric's reading), use: reading, since: 2026-10-28 }
+  - { term: "[org] (as a placeholder)", use: placeholder, since: 2026-10-26 }
+  - { term: library (as an element-model key), use: archetype, since: 2026-10-26 }
+  - { term: manifest (as an extension file), use: extension, since: 2026-10-26 }
+  - { term: activate (an archetype), use: adopt, since: 2026-10-26 }
+  - { term: declined (an archetype), use: not-selected, since: 2026-10-26 }
+  - { term: Hire to Retire (a candidate name of the d2 family; it is Contributor to Succession, MODEL), use: value-stream-family, since: 2026-07-21 }
+  - { term: Welcome to Transition (a candidate name of the d2 family; it is Contributor to Succession, MODEL), use: value-stream-family, since: 2026-07-21 }
+  - { term: ring (closeness to the model), use: shell, since: 2026-10-24 }
+  - { term: orbit_level, use: shell, since: 2026-10-24 }
+  - { term: seat (as element 9), use: body, since: 2026-10-18 }
+  - { term: position (as a slot of the scaffold), use: scaffold, since: 2026-10-18 }
+  - { term: house, use: commons, since: 2026-10-16 }
+  - { term: Commons OS, use: commons-core, since: 2026-07-28 }
+  - { term: Game, use: world, since: 2026-10-16 }
+  - { term: game pole, use: world, since: 2026-10-16 }
+  - { term: lead, use: inquiry, since: 2026-10-16 }
+  - { term: tier, use: visibility-class, since: 2026-10-05 }
+  - { term: Sub-Core, use: commons-core, since: 2026-09-13 }
+  - { term: Organization (as element 9), use: body, since: 2026-10-05 }
+  - { term: value proposition (as element 4), use: value-exchange, since: 2026-10-05 }

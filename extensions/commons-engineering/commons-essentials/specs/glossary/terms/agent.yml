@@ -1,0 +1,20 @@
+id: agent
+term: Agent
+layer: how
+kind: concept
+definition: 'A machine that works under a user, its human''s or, when it works on its own, a technical user of its
+  own, in any client, and is never accountable.'
+why: 'An agent may hold a Post and do the work of a Body, but what it does resolves to a human who is accountable
+  for it; it carries no mandate of its own.'
+relations:
+  works_under: user
+  runs_in: client
+  accountable: human
+not:
+- a client
+- a user
+status: accepted
+decided:
+  date: '2026-10-29'
+  by: Holger
+  where: 'commons.o#98, comment 6505618412: Adopted 29 October 2026 (the merge of commons.o#100)'

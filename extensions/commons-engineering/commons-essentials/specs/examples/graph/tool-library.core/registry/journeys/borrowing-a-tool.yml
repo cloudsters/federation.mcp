@@ -1,0 +1,8 @@
+kind: journey
+slug: borrowing-a-tool
+title: Borrowing a tool
+stakeholder: member
+mirrors: lending
+shells:
+- roam
+- open

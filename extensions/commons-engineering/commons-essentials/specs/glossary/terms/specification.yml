@@ -1,0 +1,14 @@
+id: specification
+term: Specification
+layer: how
+kind: artefact
+definition: One file holding the requirements of one subject, in the form the specification rule sets, read and checked alike by humans and agents.
+why: A commons is built, run and applied by people and agents from the same files, so what it requires must be testable and decided, not said around it.
+relations:
+  holds: requirement
+  part_of: essentials
+status: accepted
+decided:
+  date: '2026-10-29'
+  by: Holger
+  where: 'commons.o#98, comment 6505618412: Adopted 29 October 2026 (the merge of commons.o#100)'

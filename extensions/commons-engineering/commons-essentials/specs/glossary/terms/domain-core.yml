@@ -1,0 +1,13 @@
+id: domain-core
+term: '[domain].core'
+layer: what
+kind: artefact
+definition: A CORE where a domain is made and maintained, which offers in `offer/` apart from its own model and keeps its research whole in `knowledge/`; it may be private.
+why: The domain is kept true by people with a mandate and a record of their own; what travels is its released offer, the extension.
+relations:
+  releases: extension
+status: accepted
+decided:
+  date: '2026-10-28'
+  by: Holger
+  where: commons.o#90, comment 6464648757

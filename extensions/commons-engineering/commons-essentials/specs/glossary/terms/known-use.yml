@@ -1,0 +1,11 @@
+id: known-use
+term: Known Use
+layer: how
+kind: concept
+definition: A use of a pattern described as a type, with its region, never naming anyone.
+why: Named cases live in the graph with their sources and are served by visibility.
+status: accepted
+decided:
+  date: '2026-10-16'
+  by: Holger
+  where: target_architecture §11

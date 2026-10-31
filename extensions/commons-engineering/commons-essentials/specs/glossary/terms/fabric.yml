@@ -1,0 +1,17 @@
+id: fabric
+term: Commons FABRIC
+layer: what
+kind: concept
+definition: 'A commons'' Fabric as a component, [commons] FABRIC: how it senses its own operational reality, reading its
+  systems of record, under access it gives, against elements of its model, and keeping a reading, never a record.'
+why: 'The model says where a commons is heading, its systems of record what is; the Fabric is the sensor between them.
+  It is the area fabric/ of the CORE and becomes a repository [commons].fabric beside the CORE, the graph, the MCP
+  and the library once it outgrows it, and it writes into neither the model nor a system of record.'
+relations:
+  is_a: component
+  part_of: commons-core
+  keeps: reading
+not:
+- a system of record
+- the social fabric of a commons
+status: draft

@@ -1,0 +1,42 @@
+# A complete example of corrections on the tool library (examples/core/tool-library.core), core-knowledge R17, R18.
+# Two corrections by the library's own people: one recorded by an agent, one prompted by a view and contesting the
+# other. Neither supersedes anything by itself; C3 contests C1 until a decision settles it. No real person is named.
+sources:
+- {id: S1, title: The library's own opening notice, origin: given, about_itself: true, as_of: '2026-10-26'}
+- {id: S3, title: Desk meeting, 3 November 2026, origin: given, about_itself: true}
+- {id: S4, title: Reply to the card view, 5 November 2026, origin: given, about_itself: true}
+claims:
+- id: C1
+  statement: The library lends tools on Tuesdays and Saturdays.
+  about: [lending]
+  sources: [S1]
+- id: C3
+  statement: From November we lend on Saturdays only; Tuesdays had no one at the desk.
+  about: [lending]
+  kind: self-description
+  sources: [S3]
+  correction:
+    given_by: P_0002
+    standing: post:d4.desk
+    given: '2026-11-03'
+    corrects: C1
+    recorded_by: the desk agent
+    release: []
+- id: C4
+  statement: Tuesdays still work if someone from the reminders team covers the desk.
+  about: [lending]
+  kind: self-description
+  sources: [S4]
+  contested_by: [C3]
+  correction:
+    given_by: P_0001
+    standing: post:d0.steward
+    given: '2026-11-05'
+    corrects: C3
+    prompted: views/card@2026-11-04
+    release:
+    - use: tool-library/expectations
+      word: lifecycle/events/2026-11-05-release-c4.yml
+# When a Story moves the desk's opening in the registry, the decision settles C3 against C1, and a later claim may
+# then supersede C1. C4 stays beside C3 with its giver; it was prompted by the card view and is judged on its own
+# source. Its giver released it for the library's own expectations by a recorded word (R18).

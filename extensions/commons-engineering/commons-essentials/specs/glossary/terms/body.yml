@@ -1,0 +1,19 @@
+id: body
+term: Body
+layer: how
+kind: element
+definition: 'Element 9: an enduring council that carries a value-creation mandate, holds capabilities and answers for
+  them, always with at least one Post held by a human, and may contain further Bodies and Posts.'
+why: 'The mandate persists while the humans and agents taking part, the work and the decision rights change; the model
+  shows that change instead of swapping occupants. A Body carries mandate and never access, which a user carries.'
+relations:
+  part_of: scaffold
+  contains: post
+not:
+- seat
+- Organization (as element 9)
+status: accepted
+decided:
+  date: '2026-10-29'
+  by: Holger
+  where: 'commons.o#98, comment 6505618412: Adopted 29 October 2026 (the merge of commons.o#100); first decided 2026-10-18, workshop/_drafts/DECISION_POSITIONS_JOBS_ROLES.md §10 (K1–K4, V2)'

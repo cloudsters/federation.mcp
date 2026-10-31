@@ -1,0 +1,8 @@
+id: five-qualities
+term: The five qualities
+layer: why
+kind: quality
+definition: 'Systematically, alive, shared, just and built to last: the test every output of a commons passes.'
+relations:
+  of: commons
+status: draft

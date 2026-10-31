@@ -1,0 +1,8 @@
+kind: body
+slug: d0
+title: Perception & Identity
+form: governing-body
+part_of: null
+mandate: registry/bodies/d0.yml#mandate
+holds:
+- shared-things

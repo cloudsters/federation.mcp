@@ -1,0 +1,285 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://commons.engineering/schemas/flow.schema.json",
+  "title": "flow",
+  "description": "A board of Commons FLOW (flow.md, flow-workshops.md, flow-graph.md, flow-bodies.md): one workshop of a commons and its items, as exported from the platform. An item is a node of the graph whose edges are its fields core, anchors, part_of (parent), raised_by, carried_by, delivered_by and observed_by. $defs hold an item, a comment and a target.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "commons",
+    "workshop",
+    "items"
+  ],
+  "properties": {
+    "commons": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "description": "the id of the commons whose workshop this is"
+    },
+    "workshop": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "name"
+      ],
+      "properties": {
+        "kind": {
+          "enum": [
+            "model",
+            "commons",
+            "project"
+          ],
+          "description": "flow.md R2"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "core": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+          "description": "the id of the CORE whose workshop this is (flow-graph R2)"
+        }
+      }
+    },
+    "humans": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "the handles of the humans who may be assignees (flow.md R16); without it, assignees are not checked against people"
+    },
+    "limits": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "integer",
+        "minimum": 1
+      },
+      "description": "per human handle, the most open items assigned to them at once (flow.md R24)"
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/item"
+      }
+    }
+  },
+  "$defs": {
+    "ref": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+#[0-9]+$",
+      "description": "owner/repo#number"
+    },
+    "item": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "ref",
+        "type",
+        "title",
+        "state",
+        "status",
+        "labels",
+        "body"
+      ],
+      "properties": {
+        "ref": {
+          "$ref": "#/$defs/ref"
+        },
+        "type": {
+          "enum": [
+            "Loop",
+            "Epic",
+            "Story",
+            "Task",
+            "Bug",
+            "Decision",
+            "Escalation",
+            "unknown"
+          ],
+          "description": "flow.md R6; `unknown` when the platform's type is none of these, so that the export never invents one"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "state": {
+          "enum": [
+            "open",
+            "closed"
+          ]
+        },
+        "closed_as": {
+          "enum": [
+            "completed",
+            "not_planned"
+          ],
+          "description": "how a closed item was closed"
+        },
+        "status": {
+          "enum": [
+            "Backlog",
+            "Ready",
+            "In Progress",
+            "Validate",
+            "Done"
+          ],
+          "description": "flow.md R17"
+        },
+        "labels": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Body labels only on an open item (flow.md R15)"
+        },
+        "assignees": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "the human who must act next (flow.md R16)"
+        },
+        "parent": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/ref"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "the Epic or Story it hangs under (flow.md R12)"
+        },
+        "body": {
+          "type": "string",
+          "description": "the item's one current state, in Markdown (flow.md R6, R7)"
+        },
+        "comments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/comment"
+          }
+        },
+        "core": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+          "description": "the id of the definite CORE its targets resolve in (CORE R2), never a repository; else the workshop's, inherited along part_of (flow-graph R2)"
+        },
+        "anchors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/target"
+          },
+          "description": "flow-graph R3"
+        },
+        "stroke": {
+          "enum": [
+            "changes",
+            "fulfils"
+          ],
+          "description": "whether the work changes an orientation or fulfils one already decided (flow.md R11)"
+        },
+        "writes_model": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "what in the model the work writes, as paths or addresses; empty when it writes nothing (flow-graph R5)"
+        },
+        "raised_by": {
+          "type": "string",
+          "pattern": "^loop:[A-Za-z0-9_.-]+$",
+          "description": "flow-graph R7"
+        },
+        "carried_by": {
+          "type": "string",
+          "pattern": "^(body|post):[a-z0-9][a-z0-9._-]*$",
+          "description": "exactly one Body or Post, a record of the CORE's element 9 (flow-graph R6)"
+        },
+        "delivered_by": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+(@[0-9a-f]{7,40}|#[0-9]+)$"
+          },
+          "description": "commits and pull requests (flow-graph R8)"
+        },
+        "observed_by": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^claim:[A-Za-z0-9_.-]+$"
+          },
+          "description": "claims of kind fact, measure or signal in the CORE's knowledge (flow-graph R9)"
+        },
+        "memberships": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "kind"
+            ],
+            "properties": {
+              "kind": {
+                "enum": [
+                  "model",
+                  "commons",
+                  "project",
+                  "unknown"
+                ],
+                "description": "`unknown` when the project's name tells no workshop kind, so that the export reports it rather than guessing"
+              },
+              "name": {
+                "type": "string"
+              }
+            }
+          },
+          "description": "every workshop that holds the item, as exported (flow-workshops R6, flow.md R36)"
+        },
+        "comments_complete": {
+          "type": "boolean",
+          "description": "false when the export could not read every comment; checks that need history then report a gap (flow.md R36)"
+        },
+        "stage": {
+          "enum": [
+            "Discover",
+            "Define",
+            "Ideate",
+            "Design",
+            "Build",
+            "Iterate"
+          ],
+          "description": "for an Epic (flow.md R35)"
+        }
+      }
+    },
+    "comment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "body"
+      ],
+      "properties": {
+        "author": {
+          "type": "string",
+          "description": "the platform account; every agent writes through its human's account"
+        },
+        "date": {
+          "type": "string"
+        },
+        "body": {
+          "type": "string",
+          "description": "its first line names the handle and the kind: delivery, position or decision (flow.md R8)"
+        }
+      }
+    },
+    "target": {
+      "type": "string",
+      "pattern": "^(([a-z0-9-]+#R[0-9]+)|((dimension|family|step|stakeholder|journey|touchpoint|value-exchange|value-stream|capability|entity|solution|body|post):[a-z0-9][a-z0-9/._-]*(#[a-z_]+:[a-z0-9][a-z0-9/._-]*)?))$",
+      "description": "a MODEL address `<kind>:<slug>` (a step as `step:<stream>/<step>`), a binding identity `<kind>:<slug>#<field>:<target>` (a step's as `value-stream:<stream>/<step>#<field>:<target>`; MODEL R18, R22), or a requirement `<spec>#R<n>` (flow-graph R3)"
+    }
+  }
+}

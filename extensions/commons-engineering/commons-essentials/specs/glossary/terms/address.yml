@@ -1,0 +1,9 @@
+id: address
+term: Address
+layer: how
+kind: concept
+definition: The reference by which a pattern, a claim or a work item outside the model names one node of the model's grammar, with a weight, a status and its source.
+why: Recognising a piece of evidence as an element is a mapping with a certainty, and ratified mappings are what the grammar learns from.
+relations:
+  part_of: scaffold
+status: draft

@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://commons.engineering/schemas/identity.schema.json",
+  "title": "identity",
+  "description": "Who a commons is: the identity file of a Commons CORE (today .commons/identity.yml; its place follows S1). Draft: it fixes only what is decided and leaves the other fields open.",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "slug",
+    "name",
+    "code"
+  ],
+  "properties": {
+    "slug": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "description": "stable; the commons' repository names derive from it"
+    },
+    "name": {
+      "type": "string",
+      "description": "the commons' own name"
+    },
+    "code": {
+      "type": "string",
+      "pattern": "^[A-Z]{2}$",
+      "description": "the commons code (glossary commons-code): two capital letters, unique among the commons that work together; forms the Body handles @Dn-<code> (Holger, 24 October 2026)"
+    },
+    "purpose": {
+      "type": "string",
+      "description": "one sentence; may be empty while the commons is being founded"
+    },
+    "locale": {
+      "type": "string"
+    },
+    "fallback_locale": {
+      "type": "string"
+    },
+    "stage": {
+      "description": "carried here until S1; its place is lifecycle/stage.yml (S7)"
+    }
+  }
+}

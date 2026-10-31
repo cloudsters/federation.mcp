@@ -1,0 +1,12 @@
+id: dimension
+term: Dimension
+layer: how
+kind: dimension
+definition: 'One of five tensions a commons holds: D0 Perception & Identity, D1 Purpose & System, D2 Participation
+  & Relationship, D3 Proposition & Exchange, D4 Production & Resilience.'
+why: '"&" is the grammar of dimensions; "A to B" the grammar of families.'
+status: accepted
+decided:
+  date: '2026-10-14'
+  by: Holger
+  where: COMMONS_MODEL_SPEC §3 (archived)

@@ -1,0 +1,17 @@
+claims:
+- id: C1
+  statement: The library lends tools on Tuesdays and Saturdays.
+  about:
+  - lending
+  sources:
+  - S1
+- id: C2
+  statement: About forty households borrowed a tool in September.
+  about:
+  - member
+  kind: measure
+  measure: households borrowing
+  period: 2026-09
+  sources:
+  - S2
+  confidence: website

@@ -1,0 +1,12 @@
+id: epic
+term: Epic
+layer: workshop
+kind: work-item
+definition: The outcome we are after, delivered through several stories; it carries the hypothesis, the decision
+  owner, and how we will know.
+why: 'In the graph: closing a connected subgraph of deltas toward a pole.'
+status: accepted
+decided:
+  date: '2026-10-16'
+  by: Holger
+  where: issue types of cloudsters and Commons-Engineering

@@ -1,0 +1,21 @@
+id: bill-of-materials
+term: Bill of materials
+layer: what
+kind: artefact
+definition: 'The single-level list of what one part directly holds, one line per child naming the child at its version
+  and its usage, generated from what the commons already holds and never kept by hand.'
+why: 'A part and a structure are separate: the part has an identity and a version, and a line says only that a parent
+  holds a child and how it uses it, never a quantity. Every bill is single-level, so everything multi-level is a
+  resolution and never stored. In German, Stückliste.'
+relations:
+  lists: part
+  line_has: usage
+  resolved_by: resolution
+not:
+- a multi-level bill (stored)
+- an inventory kept by hand
+status: accepted
+decided:
+  date: '2026-10-30'
+  by: Holger
+  where: 'commons.o#107, comment 6519835234: Adopted 30 October 2026 (step 1 of the bill of materials)'

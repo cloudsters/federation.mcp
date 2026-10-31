@@ -1,0 +1,5 @@
+kind: stakeholder
+slug: gardener
+title: Gardener
+shell: core
+start: true

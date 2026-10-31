@@ -1,0 +1,8 @@
+kind: body
+slug: d4
+title: Production & Resilience
+form: governing-body
+part_of: d0
+mandate: registry/bodies/d4.yml#mandate
+holds:
+- tool-lending

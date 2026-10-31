@@ -1,0 +1,9 @@
+id: journey
+term: Journey
+layer: how
+kind: element
+definition: 'Element 2: how a stakeholder experiences the system.'
+relations:
+  part_of: scaffold
+  of: stakeholder
+status: draft

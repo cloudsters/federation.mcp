@@ -1,0 +1,88 @@
+# The minimal board of Commons FLOW: a tool library run by one person, Ana, with her agents. One Epic and one Story
+# in its Model Workshop. It passes check_flow.py with gaps only.
+commons: tool-library
+workshop:
+  kind: model
+  name: Tool library — Model Workshop
+  core: tool-library
+humans:
+- ana
+limits:
+  ana: 5
+items:
+- ref: tool-library/tool-library.core#1
+  type: Epic
+  title: Lending runs without the founder
+  state: open
+  status: Ready
+  labels:
+  - D4
+  assignees: []
+  parent: null
+  body: '## Goal
+
+    Anchor: `value-stream:lending` · changes who carries lending, from Ana alone to the desk Body
+
+    ## Approach
+
+    Hand the lending steps to the desk Body one by one, starting with returns.
+
+    ## Deliverables
+
+    - the desk Body holds `capability:loan-handling`
+
+    ## Definition of Done
+
+    - a month of loans runs with Ana only accepting, not executing
+
+    '
+  anchors:
+  - value-stream:lending
+  stroke: changes
+  carried_by: body:d4
+  memberships:
+  - kind: model
+    name: Tool library — Model Workshop
+  comments_complete: true
+  stage: Define
+- ref: tool-library/tool-library.core#2
+  type: Story
+  title: Returns are logged by the desk
+  state: open
+  status: In Progress
+  labels:
+  - D4
+  assignees: []
+  parent: tool-library/tool-library.core#1
+  body: '## Goal
+
+    Anchor: `capability:loan-handling` · changes who logs a returned tool
+
+    ## Approach
+
+    The desk agent logs each return in the lending ledger; Ana checks the first ten.
+
+    ## Deliverables
+
+    - `registry/bodies/d4.desk.yml` holds `capability:loan-handling`
+
+    ## Definition of Done
+
+    - ten returns logged by the desk and accepted by Ana
+
+    - Ana observes for a month whether returns are missed
+
+    '
+  comments:
+  - author: ana
+    body: '@D4-TL · L1 · C1 — delivery: taken up: returns, by the desk agent'
+  anchors:
+  - capability:loan-handling
+  stroke: changes
+  carried_by: body:d4
+  memberships:
+  - kind: model
+    name: Tool library — Model Workshop
+  comments_complete: true
+  writes_model:
+  - registry/bodies/d4.desk.yml

@@ -1,0 +1,27 @@
+kind: value-stream
+slug: lending
+title: Lending
+family: demand-to-fulfillment
+dimension: d4
+steps:
+- slug: request
+  title: Request
+  capabilities:
+  - loan-handling
+  entities:
+  - loan
+- slug: hand-out
+  title: Hand out
+  capabilities:
+  - loan-handling
+  entities:
+  - tool
+  - loan
+- slug: take-back
+  title: Take back
+  capabilities:
+  - loan-handling
+  - tool-care
+  entities:
+  - tool
+  - loan

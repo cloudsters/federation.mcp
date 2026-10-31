@@ -1,0 +1,5 @@
+kind: capability
+slug: loans
+title: Loans
+level: L2
+parent: tool-lending

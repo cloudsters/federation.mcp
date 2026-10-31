@@ -1,0 +1,12 @@
+id: install
+term: Install
+layer: what
+kind: concept
+definition: To make an extension present in a commons whole and read-only, with its origin and version.
+why: Installing makes the whole offer readable; it takes nothing into the commons' own registry. Installing an extension whole never means adopting it whole. One step of a configuration.
+relations:
+  part_of: configuration
+  of: extension
+not:
+- adopt
+status: draft

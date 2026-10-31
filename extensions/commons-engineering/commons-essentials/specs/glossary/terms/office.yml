@@ -1,0 +1,13 @@
+id: office
+term: Office
+layer: how
+kind: concept
+definition: The working and coordination arrangement through which an accountable steward, together with the humans and agents serving their Posts, fulfils their mandates across the relevant Bodies.
+why: One place for each steward's word lets it reach many Bodies; Offices multiply with stewards and never divide, and they hold no mandate of their own.
+relations:
+  part_of: body
+status: accepted
+decided:
+  date: '2026-10-29'
+  by: Holger
+  where: 'commons.o#98, comment 6505618412: Adopted 29 October 2026 (the merge of commons.o#100); first decided 2026-10-24, commons.o#81, E1 (comment 6383525475)'

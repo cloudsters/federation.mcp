@@ -1,0 +1,24 @@
+id: time-slice
+term: Time slice
+layer: how
+kind: concept
+definition: 'A commons'' model at one horizon: slice 0, named [commons].core, is the near future informed by evidence;
+  every later slice, named [commons].10.core or [world].[commons].20.core, holds one or several worlds, judged
+  by coherence.'
+why: 'Slices roll: they are re-projected on a fixed rhythm, so a horizon stays a horizon, and every commons has the
+  same ones and stays comparable. In a name the slice is its own segment and the dot is its marker; a segment of
+  digits only is always a horizon, so no slug may be digits only. It is displayed as [commons] CORE +10; the + appears
+  in the display only, because repository names do not allow it. Absolute years live only in records (as_of, target)
+  and in views.'
+relations:
+  measured_by: horizon
+  holds: world
+not:
+- vintage
+- version
+- year
+status: accepted
+decided:
+  date: '2026-10-26'
+  by: Holger
+  where: commons.o#85 (rolling slices, 25 October; the marker, comment 6415790681)

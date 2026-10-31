@@ -1,0 +1,104 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://commons.engineering/schemas/glossary.term.schema.json",
+  "title": "glossary.term",
+  "description": "One term of Commons Engineering. Every word a concept, schema or rendering uses resolves to one of these.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "term",
+    "layer",
+    "kind",
+    "definition",
+    "status"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "description": "stable; never reused"
+    },
+    "term": {
+      "type": "string",
+      "description": "the term as written, English only"
+    },
+    "layer": {
+      "enum": [
+        "why",
+        "how",
+        "what",
+        "workshop"
+      ],
+      "description": "the question the term answers: why we shape value creation, how we do it, what comes of it; workshop for the work items. Not an orbit: orbits measure generality and belong to patterns"
+    },
+    "kind": {
+      "enum": [
+        "concept",
+        "quality",
+        "element",
+        "dimension",
+        "family",
+        "state",
+        "artefact",
+        "work-item",
+        "repository"
+      ]
+    },
+    "definition": {
+      "type": "string",
+      "description": "one sentence, normative"
+    },
+    "why": {
+      "type": "string",
+      "description": "why the term holds, or why it is drawn where it is"
+    },
+    "relations": {
+      "type": "object",
+      "description": "named relations to other term ids",
+      "additionalProperties": {
+        "oneOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "not": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "rejected synonyms; the checker flags them in any new text"
+    },
+    "status": {
+      "enum": [
+        "draft",
+        "accepted"
+      ],
+      "description": "draft until Holger accepts it"
+    },
+    "decided": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "date": {
+          "type": "string",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+        },
+        "by": {
+          "type": "string"
+        },
+        "where": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,11 @@
+id: system-of-systems
+term: System of systems
+layer: why
+kind: concept
+definition: Life, Urban, Business and Ecology seen as one system, each a commons among the others.
+why: The domains cannot be played off against one another because they share one model.
+status: accepted
+decided:
+  date: '2026-10-16'
+  by: Holger
+  where: target_architecture §11

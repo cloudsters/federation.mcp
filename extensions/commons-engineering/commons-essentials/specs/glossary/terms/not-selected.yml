@@ -1,0 +1,14 @@
+id: not-selected
+term: Not selected
+layer: what
+kind: state
+definition: An archetype offered by an installed extension that the commons does not adopt; an answer, not a gap.
+why: One word for the act and for the blueprint's outcome (rule 15), so that declining and not selecting are not two things. One step of a configuration.
+relations:
+  part_of: configuration
+  of: archetype
+  counterpart: adopt
+not:
+- declined
+- missing
+status: draft

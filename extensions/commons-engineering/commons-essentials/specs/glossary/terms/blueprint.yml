@@ -1,0 +1,6 @@
+id: blueprint
+term: Blueprint
+layer: how
+kind: artefact
+definition: The readable state of a commons' model.
+status: draft

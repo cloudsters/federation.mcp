@@ -1,0 +1,9 @@
+id: delta
+term: Delta
+layer: how
+kind: concept
+definition: A difference in the graph between the present and the near future being worked toward.
+relations:
+  raised_by: loop
+  resolved_by: story
+status: draft

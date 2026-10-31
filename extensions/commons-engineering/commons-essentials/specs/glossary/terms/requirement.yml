@@ -1,0 +1,9 @@
+id: requirement
+term: Requirement
+layer: how
+kind: concept
+definition: One testable statement that a commons MUST or SHOULD meet, carried with its reason and its check.
+why: The statement is the machine channel and the reason is the intent channel; agents need both to apply a rule to a case nobody foresaw.
+relations:
+  held_by: specification
+status: draft

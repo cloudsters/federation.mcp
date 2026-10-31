@@ -1,0 +1,18 @@
+id: component
+term: Component
+layer: what
+kind: concept
+definition: 'A tangible part of a commons that one can point to: Commons CORE, LIBRARY, FABRIC, GRAPH and MCP, each with
+  the practice of the same name.'
+why: 'The components are proper names, written in capitals; a commons has them as [commons].core, [commons].graph and so
+  on, and the Federation as federation.core, federation.mcp.'
+relations:
+  worked_by: practice
+not:
+- container
+- organ
+status: accepted
+decided:
+  date: '2026-10-29'
+  by: Holger
+  where: 'commons.o#98, comment 6505618412: Adopted 29 October 2026 (the merge of commons.o#100)'

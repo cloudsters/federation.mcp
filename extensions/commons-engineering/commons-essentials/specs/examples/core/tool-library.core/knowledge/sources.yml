@@ -1,0 +1,11 @@
+sources:
+- id: S1
+  title: The library's own opening notice
+  origin: given
+  about_itself: true
+  as_of: '2026-10-26'
+- id: S2
+  title: The neighbourhood newsletter, October issue
+  origin: public
+  trust_tier: B
+  published: 2026-10

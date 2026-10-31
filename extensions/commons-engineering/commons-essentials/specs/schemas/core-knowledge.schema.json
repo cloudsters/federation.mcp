@@ -1,0 +1,501 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://commons.engineering/schemas/core-knowledge.schema.json",
+  "title": "core-knowledge",
+  "description": "The grounding a Commons CORE keeps in knowledge/ (core-knowledge.md): the root is knowledge/sources.yml or knowledge/claims.yml, holding sources and the claims projected from them. The standing of a claim is derived from these fields, never stored.",
+  "type": "object",
+  "properties": {
+    "sources": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/source"
+      }
+    },
+    "claims": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/claim"
+      }
+    }
+  },
+  "$defs": {
+    "date": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}(-\\d{2})?$"
+    },
+    "source": {
+      "type": "object",
+      "required": [
+        "id",
+        "title",
+        "origin"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "origin": {
+          "enum": [
+            "public",
+            "given",
+            "engagement",
+            "imported",
+            "bought",
+            "third-party"
+          ],
+          "description": "public · given by the commons · learned in engagement · imported from an extension · bought under licence · provided by a third party"
+        },
+        "trust_tier": {
+          "enum": [
+            "A",
+            "B",
+            "C",
+            "D"
+          ],
+          "description": "the grade of the source"
+        },
+        "about_itself": {
+          "type": "boolean",
+          "description": "the source speaks about its own author, and is authoritative for that"
+        },
+        "copy_of": {
+          "type": "string",
+          "description": "the id of the source this one repeats; copies count once"
+        },
+        "published": {
+          "$ref": "#/$defs/date"
+        },
+        "as_of": {
+          "$ref": "#/$defs/date"
+        },
+        "raw": {
+          "type": "object",
+          "required": [
+            "sha256",
+            "ref"
+          ],
+          "properties": {
+            "sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "ref": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "description": "the raw bytes, byte-identical and pinned"
+        },
+        "visibility": {
+          "enum": [
+            "public-record",
+            "published-profile",
+            "private"
+          ]
+        },
+        "excluded": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "what was left out of it, and why"
+        },
+        "designation": {
+          "type": "string",
+          "minLength": 1,
+          "description": "a standard's, framework's or law's own designation (R19)"
+        },
+        "terms": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "further words it is known by: abbreviations, short titles"
+        },
+        "edition": {
+          "type": "string",
+          "minLength": 1,
+          "description": "the id of the edition in force; it names one edition and never changes (R19)"
+        },
+        "edition_title": {
+          "type": "string",
+          "minLength": 1,
+          "description": "the edition's full title, kept once here"
+        },
+        "scheduled": {
+          "type": "array",
+          "description": "editions enacted and not yet in force (R19)",
+          "items": {
+            "type": "object",
+            "required": [
+              "edition",
+              "in_force"
+            ],
+            "properties": {
+              "edition": {
+                "type": "string",
+                "minLength": 1
+              },
+              "edition_title": {
+                "type": "string"
+              },
+              "in_force": {
+                "$ref": "#/$defs/date"
+              },
+              "affects": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "jurisdiction": {
+          "type": "string",
+          "minLength": 1,
+          "description": "who enacts it; `global` where no jurisdiction does (R19)"
+        },
+        "area": {
+          "type": "string",
+          "description": "the area of the model it speaks to"
+        },
+        "relation": {
+          "enum": [
+            "derived-from",
+            "adopt",
+            "bind",
+            "mirror",
+            "own"
+          ],
+          "description": "how the commons' records relate to it; `own` is the commons' own synthesis (R19)"
+        },
+        "verified": {
+          "type": "object",
+          "description": "checked against the primary source by confirmation and by refutation, with their dates, and what the second lens corrected (R19)",
+          "properties": {
+            "confirmation": {
+              "$ref": "#/$defs/date"
+            },
+            "refutation": {
+              "$ref": "#/$defs/date"
+            },
+            "corrected": {}
+          }
+        },
+        "standing": {
+          "const": "design",
+          "description": "for a source of relation `own`: a design, never evidence of the world (R19)"
+        },
+        "derivation": {
+          "type": "string",
+          "minLength": 1,
+          "description": "for a source of relation `own`: how the synthesis was made (R19)"
+        },
+        "licence": {
+          "type": "string",
+          "description": "its licence status"
+        },
+        "class": {
+          "type": "string",
+          "description": "its access class"
+        },
+        "informs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "the records it informs, as kind:slug"
+        }
+      }
+    },
+    "claim": {
+      "type": "object",
+      "required": [
+        "id",
+        "statement",
+        "about",
+        "sources"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "statement": {
+          "type": "string",
+          "minLength": 1
+        },
+        "about": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "what it is about: model records by slug, or evidence entities"
+        },
+        "addresses": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          },
+          "description": "its addresses into the model (model.md R18)"
+        },
+        "kind": {
+          "enum": [
+            "fact",
+            "measure",
+            "signal",
+            "self-description",
+            "derived"
+          ],
+          "default": "fact"
+        },
+        "measure": {
+          "type": "string"
+        },
+        "period": {
+          "type": "string",
+          "description": "the period a measure is for; apart from when it was published"
+        },
+        "sources": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "source ids; empty is a gap"
+        },
+        "inputs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "a derived claim: the claims it is derived from"
+        },
+        "contested_by": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "supersedes": {
+          "type": "string"
+        },
+        "confidence": {
+          "type": "string",
+          "description": "a word of the earlier vocabularies, read through the mapping in core-knowledge.md; never a computed probability"
+        },
+        "correction": {
+          "type": "object",
+          "description": "a correction by the commons' own person (R17); its form is $defs/correction, checked by `corrections`"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "derived"
+              }
+            },
+            "required": [
+              "kind"
+            ]
+          },
+          "then": {
+            "required": [
+              "inputs"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "measure"
+              }
+            },
+            "required": [
+              "kind"
+            ]
+          },
+          "then": {
+            "required": [
+              "measure",
+              "period"
+            ]
+          }
+        }
+      ]
+    },
+    "binding": {
+      "type": "object",
+      "required": [
+        "source",
+        "edition"
+      ],
+      "additionalProperties": false,
+      "description": "a record's binding of a source at the edition in force for the time it speaks for (R20)",
+      "properties": {
+        "source": {
+          "type": "string",
+          "minLength": 1
+        },
+        "edition": {
+          "type": "string",
+          "minLength": 1
+        },
+        "jurisdiction": {
+          "type": "string",
+          "minLength": 1
+        },
+        "relation": {
+          "enum": [
+            "derived-from",
+            "adopt",
+            "bind",
+            "mirror",
+            "own"
+          ]
+        },
+        "part": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "jurisdiction": {
+      "type": "object",
+      "required": [
+        "jurisdiction",
+        "bindings"
+      ],
+      "description": "knowledge/jurisdictions/<jurisdiction>.yml: the bindings of one jurisdiction's law to records (R20)",
+      "properties": {
+        "jurisdiction": {
+          "type": "string",
+          "minLength": 1
+        },
+        "bindings": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "record",
+              "binds"
+            ],
+            "properties": {
+              "record": {
+                "type": "string",
+                "minLength": 1
+              },
+              "binds": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/binding"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "correction": {
+      "type": "object",
+      "required": [
+        "given_by",
+        "standing",
+        "given",
+        "corrects",
+        "release"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "given_by": {
+          "type": "string",
+          "minLength": 1,
+          "description": "the giver's id in the party register"
+        },
+        "standing": {
+          "type": "string",
+          "pattern": "^(post|body|role):[a-z0-9][a-z0-9._-]*$",
+          "description": "the role or Post the giver held when giving it, such as post:d4.desk"
+        },
+        "given": {
+          "type": "string",
+          "pattern": "^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$",
+          "description": "the date it was given"
+        },
+        "corrects": {
+          "type": "string",
+          "minLength": 1,
+          "description": "the id of the claim or record it corrects"
+        },
+        "recorded_by": {
+          "type": "string",
+          "minLength": 1,
+          "description": "the agent or session that recorded it, where one did"
+        },
+        "prompted": {
+          "type": "string",
+          "minLength": 1,
+          "description": "the view and revision that prompted it, where one did"
+        },
+        "release": {
+          "type": "array",
+          "description": "each use beyond the correction's own CORE and claim, with the giver's recoverable word; empty means its scope only (R18)",
+          "items": {
+            "type": "object",
+            "required": [
+              "use",
+              "word"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "use": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "^[^*]+$"
+              },
+              "word": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        }
+      }
+    },
+    "claim_with_correction": {
+      "type": "object",
+      "required": [
+        "kind",
+        "correction"
+      ],
+      "properties": {
+        "kind": {
+          "const": "self-description"
+        },
+        "correction": {
+          "$ref": "#/$defs/correction"
+        }
+      }
+    }
+  },
+  "anyOf": [
+    {
+      "required": [
+        "sources"
+      ]
+    },
+    {
+      "required": [
+        "claims"
+      ]
+    }
+  ]
+}

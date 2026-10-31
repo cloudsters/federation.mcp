@@ -1,0 +1,14 @@
+id: commons-workshop
+term: Commons Workshop
+layer: how
+kind: concept
+definition: "Where people and agents work with a commons' model in their own context (questions, artefacts, services, code, products) without changing the model."
+why: The boundary to the Model Workshop is the direction of writing; a Commons Workshop reads what the commons has released to it, and what it learns returns to the Model Workshop as a proposal, never as a direct change. Until 21 October 2026 this id meant the place where a Commons CORE is worked on; that meaning is now `model-workshop`.
+relations:
+  reads: commons-core
+  returns_proposals_to: model-workshop
+status: accepted
+decided:
+  date: '2026-10-29'
+  by: Holger
+  where: 'commons.o#98, comment 6505618412: Adopted 29 October 2026 (the merge of commons.o#100); first decided 2026-10-21, commons.o#71 (W1, W2)'

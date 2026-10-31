@@ -1,0 +1,18 @@
+id: commons-core
+term: Commons CORE
+layer: why
+kind: concept
+definition: The cybernetic model of a commons' shared value creation; it gives orientation and shapes the future.
+why: 'The value creation is regulated, not the people. Its guiding sentence: "The model''s present is its last commit
+  — and the model holds the near future." It guides the work, which always works on the near future, and is no claim
+  about reality: comparing commits shows how the model changed, not how reality drifted (commons.o#91, comment
+  6470680520).'
+relations:
+  is_a: component
+  held_in: instance
+  worked_on_in: model-workshop
+status: accepted
+decided:
+  date: '2026-10-29'
+  by: Holger
+  where: 'commons.o#98, comment 6505618412: Adopted 29 October 2026 (the merge of commons.o#100); first decided 2026-09-16, PLAN.md §1, core sentence'

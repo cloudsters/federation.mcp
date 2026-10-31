@@ -1,0 +1,217 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "library-patterns.schema.json",
+  "title": "Commons LIBRARY patterns: a pattern's front matter, and in $defs a line of the agents' index",
+  "type": "object",
+  "required": [
+    "id",
+    "slug",
+    "title",
+    "summary",
+    "orbital_layer",
+    "ontology",
+    "lifecycle",
+    "license",
+    "attribution",
+    "contributors"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^pat_[a-z0-9]+$"
+    },
+    "slug": {
+      "$ref": "#/$defs/id"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "summary": {
+      "type": "string",
+      "minLength": 1
+    },
+    "orbital_layer": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 5
+    },
+    "gravitational_hubs": {
+      "type": "array",
+      "description": "the principles of orbit 1 it rests on, by id or slug (R4); an earlier {hub_id, influence} is read as its hub_id",
+      "items": {
+        "oneOf": [
+          {
+            "type": "string",
+            "minLength": 1
+          },
+          {
+            "type": "object",
+            "required": [
+              "hub_id"
+            ]
+          }
+        ]
+      }
+    },
+    "ontology": {
+      "type": "object",
+      "required": [
+        "search_hints"
+      ],
+      "properties": {
+        "search_hints": {
+          "type": "object",
+          "required": [
+            "primary_tension"
+          ]
+        }
+      }
+    },
+    "lifecycle": {
+      "type": "object",
+      "required": [
+        "status"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "candidate",
+            "stable",
+            "archived",
+            "draft",
+            "observed"
+          ],
+          "description": "candidate, stable or archived; an earlier draft or observed is read as candidate (R10)"
+        }
+      }
+    },
+    "relationships": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "curated relations by id: requires (never in a circle), complementary, alternatives (R9)",
+      "properties": {
+        "requires": {
+          "type": "array"
+        },
+        "complementary": {
+          "type": "array"
+        },
+        "alternatives": {
+          "type": "array"
+        }
+      }
+    },
+    "value_model": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "contributors": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string"
+      }
+    },
+    "sources": {
+      "type": "array"
+    },
+    "license": {
+      "type": "string",
+      "minLength": 1
+    },
+    "attribution": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "$defs": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+    },
+    "index_line": {
+      "type": "object",
+      "required": [
+        "kind",
+        "id",
+        "slug",
+        "orbit",
+        "file",
+        "title",
+        "tension",
+        "summary",
+        "context",
+        "links",
+        "beyond"
+      ],
+      "properties": {
+        "kind": {
+          "const": "pattern"
+        },
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9.-]*/[A-Za-z0-9_.-]+$"
+        },
+        "orbit": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 3
+        },
+        "context": {
+          "type": "object",
+          "required": [
+            "families"
+          ],
+          "properties": {
+            "families": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "^vsf:[a-z0-9-]+$"
+              }
+            }
+          }
+        },
+        "links": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["to", "kind", "by"],
+            "additionalProperties": false,
+            "properties": {
+              "to": {"type": "string"},
+              "kind": {"type": "string"},
+              "by": {"enum": ["stated", "computed"]},
+              "method": {"type": "string"},
+              "score": {"type": "number"},
+              "score_is": {"type": "string"}
+            },
+            "if": {"properties": {"by": {"const": "computed"}}},
+            "then": {"required": ["method"]},
+            "dependentRequired": {"score": ["score_is"]}
+          }
+        },
+        "beyond": {
+          "type": "array",
+          "maxItems": 5,
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "additionalProperties": true,
+  "not": {
+    "anyOf": [
+      {
+        "required": [
+          "graph_garden"
+        ]
+      }
+    ]
+  }
+}

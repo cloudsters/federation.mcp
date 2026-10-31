@@ -1,0 +1,15 @@
+id: value-stream-step
+term: Value Stream Step
+layer: how
+kind: concept
+definition: A step that brings the value exchange closer to its fulfilment; the capability it needs is bound to
+  it at L3.
+why: A step is part of the way to the promise, never detached from it.
+relations:
+  part_of: value-stream
+  binds: capability
+status: accepted
+decided:
+  date: '2026-10-16'
+  by: Holger
+  where: conversation

@@ -1,0 +1,102 @@
+# The complete example of Commons MODEL (model.md, part 7): a neighbourhood tool library, every element once or
+# more, every binding set. check_model.py reads it with 0 fail, 0 should and 0 gaps.
+# A changed binding, for example: moving loan-handling from lending-ledger to a new solution removes the binding
+# solution:lending-ledger#carries:loan-handling and adds solution:<new>#carries:loan-handling (model.md, R22).
+records:
+  - {kind: stakeholder, slug: member, title: Member, shell: open}
+  - {kind: stakeholder, slug: keeper, title: Keeper, shell: core}
+
+  - kind: journey
+    slug: borrowing-a-tool
+    title: Borrowing a tool
+    stakeholder: member
+    mirrors: lending
+    shells: [roam, open]
+
+  - kind: touchpoint
+    slug: lending-desk
+    title: Lending desk
+    stakeholder: member
+    journey: borrowing-a-tool
+    steps: [lending/hand-out, lending/take-back]
+
+  - kind: value-exchange
+    slug: tool-for-care
+    title: A tool for its care
+    touchpoint: lending-desk
+    offered: [a working tool for as long as it is needed]
+    returned: [the tool back, clean and on time, word of what broke]
+
+  - kind: value-stream
+    slug: lending
+    title: Lending
+    family: demand-to-fulfillment
+    dimension: d4
+    steps:
+      - {slug: request, title: Request, capabilities: [loan-handling], entities: [loan]}
+      - {slug: hand-out, title: Hand out, capabilities: [loan-handling], entities: [tool, loan]}
+      - {slug: take-back, title: Take back, capabilities: [loan-handling, tool-care], entities: [tool, loan]}
+
+  - {kind: capability, slug: shared-things, title: Keeping shared things, level: L0, parent: null}
+  - {kind: capability, slug: tool-lending, title: Tool lending, level: L1, parent: shared-things}
+  - {kind: capability, slug: loans, title: Loans, level: L2, parent: tool-lending}
+  - {kind: capability, slug: tool-keeping, title: Tool keeping, level: L2, parent: tool-lending}
+  - {kind: capability, slug: loan-handling, title: Loan handling, level: L3, parent: loans}
+  - {kind: capability, slug: tool-care, title: Tool care, level: L3, parent: tool-keeping}
+
+  - {kind: entity, slug: tool, title: Tool}
+  - {kind: entity, slug: loan, title: Loan}
+
+  - kind: solution
+    slug: lending-ledger
+    title: Lending ledger
+    carries: [loan-handling]
+
+  - kind: body
+    slug: d0
+    title: Perception & Identity
+    form: governing-body
+    part_of: null                      # the outermost Body: always written, null
+    mandate: registry/bodies/d0.yml#mandate
+    holds: [shared-things]
+  - kind: body
+    slug: d4
+    title: Production & Resilience
+    form: governing-body
+    part_of: d0
+    mandate: registry/bodies/d4.yml#mandate
+    holds: [tool-lending]
+
+  - kind: post
+    slug: d0.steward
+    of: d0
+    title: Steward
+    responsibility: keeps the whole in view and answers for what the mandates reserve to the steward
+    accountable: person:P_0001
+    held_by:
+      - {kind: human, id: person:P_0001, since: '2026-10-26'}
+  - kind: post
+    slug: d4.desk
+    of: d4
+    title: Desk
+    responsibility: runs the lending desk on opening days
+    accountable: person:P_0001
+    held_by:
+      - {kind: human, id: person:P_0001, since: '2026-10-26'}
+      - {kind: human, id: person:P_0002, since: '2026-10-26'}
+  - kind: post
+    slug: d4.reminders
+    of: d4
+    title: Reminders
+    responsibility: reminds members of tools due back
+    accountable: body:d4               # d4 has no steward Post, so it resolves through part_of to d0.steward
+    held_by:
+      - {kind: agent, id: reminder, brief: workshop/bodies/start/reminder.md, on_behalf_of: person:P_0001, since: '2026-10-26'}
+    safeguards:
+      evals: workshop/evals/reminder.md
+      kill_switch: the keeper on duty switches it off in the ledger
+      scope: sends reminders about tools due back; nothing else
+      review: {by: person:P_0001, every: month}
+
+addresses:
+  - {from: a pattern on lending libraries, to: {kind: family, slug: demand-to-fulfillment}, weight: 0.8, status: ratified, source: human}

@@ -1,0 +1,5 @@
+kind: solution
+slug: lending-ledger
+title: Lending ledger
+carries:
+- loan-handling

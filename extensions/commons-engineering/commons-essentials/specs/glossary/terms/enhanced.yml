@@ -1,0 +1,13 @@
+id: enhanced
+term: Enhanced
+layer: what
+kind: artefact
+definition: The served part of an extension, its depth, patterns and studies, never installed or copied into a CORE.
+relations:
+  part_of: extension
+  paired_with: essentials
+status: accepted
+decided:
+  date: '2026-10-28'
+  by: Holger
+  where: commons.o#90, comment 6464676842
