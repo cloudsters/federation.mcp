@@ -1,0 +1,30 @@
+# The checks of federation.mcp, on every pull request and on main. Run with `python -B`, so that no bytecode is
+# written into the installed copy (its digest and `immutable` would break).
+name: check
+on:
+  pull_request:
+  push:
+    branches: [main]
+permissions:
+  contents: read
+env:
+  TOOLS: extensions/commons-engineering/commons-essentials/specs/tools
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install pyyaml jsonschema
+      - name: the installed release, against the record digest of its lock (library R9)
+        run: python -B "$TOOLS/check_extension.py" --core .
+      - name: the served access (mcp); `setup` fails here by design, since the users live in the Federation's CORE
+        run: |
+          python -B "$TOOLS/check_mcp.py" served | tee mcp.txt || true
+          if grep '^fail:' mcp.txt | grep -v '^fail: setup:'; then exit 1; fi
+      - name: the transport over the built CORE
+        run: python -B deploy/build.py && python -B tests/test_transport.py
+      - name: nothing was written into the installed copy
+        run: test -z "$(git status --porcelain -- extensions)"

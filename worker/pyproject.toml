@@ -1,0 +1,9 @@
+[project]
+name = "federation-mcp"
+version = "0.1.0"
+description = "The Worker of federation.mcp: the released serve_mcp.py behind MCP's Streamable HTTP"
+requires-python = ">=3.13"
+dependencies = ["pyyaml", "jsonschema"]
+
+[dependency-groups]
+dev = ["workers-py", "workers-runtime-sdk"]

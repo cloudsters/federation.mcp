@@ -1,0 +1,8 @@
+# The Worker federation-mcp (H3, H4; cloudsters.o#59). No credential lives here: the deploy reads
+# CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID from the repository's secrets.
+name = "federation-mcp"
+main = "src/main.py"
+compatibility_date = "2026-10-01"
+compatibility_flags = ["python_workers"]
+workers_dev = false
+routes = [{ pattern = "mcp.cloudsters.net/federation*", zone_name = "cloudsters.net" }]
